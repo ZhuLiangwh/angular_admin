@@ -1,17 +1,14 @@
 # angular_admin
----
+
 ## Install
-
 npm install
-
-----
 
 ## Run
 node server
 
----
 ## Play
 watch css:
+
 > gulp watch:auth 
 
 build
