@@ -1,0 +1,109 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="adblockerfile_form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group" style="display:none">
+                            <label class="col-sm-2 control-label">ID: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.id" name="id" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">规则名称: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" ng-model="entity.title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">规则描述: </label>
+                            <div class="col-sm-6">
+                                <textarea type="text" name="name" class="form-control" ng-model="entity.description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">规则文件: </label>
+                            <div class="col-sm-6">
+                                <div ng-if="isEditState && !fileChanged" class="file-wrapper" style="margin-bottom:10px;">
+                                    <!-- <input type="text" ng-model="entity.blocker_file" name="blocker_file" class="form-control" 
+                                    style="display:inline;max-width:200px;background:#f9f9f9;border:0 solid #f9f9f9;outline:none;" readonly>
+                                    <i class="glyphicon glyphicon-arrow-down" style="cursor:pointer" ng-click="download()"></i> -->
+                                    <a ng-href="{{entity.blocker_url}}" name="blocker_url" style="color:#666;" target="_blank"
+                                    title="点击转到...">{{entity.blocker_url}}</a>
+                                </div>
+                                <div class="select-file-wrap">
+                                    <input type="file" name="file" class="input-file" file-model="entity.blocker_file" on-changed="getFileInfo(node)">
+                                    <button class="btn btn-default">更改文件</button>
+                                    <span>{{entity.blocker_file.name}}</span>
+                                    <span class="control-tip" style="font-size:14px;">只能上传.txt或.json的文件</span>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--本地化描述-->
+        <div class="widget-box">
+            <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                <h5>本地化描述</h5>
+            </div>
+            <div collapse="isCollapse2">
+                <div class="widget-content">
+                    <div class="form-group">
+                        <div class="inline-ref-table">
+                            <table class="table table-bordered ref-table ref-theme">
+                                <thead>
+                                <tr>
+                                    <th>Locale名称</th>
+                                    <th>描述</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                               <tbody>
+                                <tr ng-repeat="refItem in entity.adblockerlocale">
+                                    <td>
+                                        <input type="text" class="form-control inline-ref-input-cell" name="localeTitle{{$index}}" dp-dynamic-field-name ng-model="refItem['locale']" readonly>
+                                        <div class="ref-btn-wrap">  
+                                            <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'adblocker', 'adblockerlocale', 'locale', $index)"></span>  
+                                            <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'adblocker', 'adblockerlocale', 'locale', $index, refItem.id)"></span>                                               
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <textarea class="form-control inline-ref-order-cell" name="localeDescrib{{$index}}" dp-dynamic-field-name ng-model="refItem.description" readonly></textarea>
+                                    </td>
+                                    <td class="ref-actions">
+                                        <button type="button" class="btn btn-success mr0" ng-click="deleteRow(refItem)" name="localeDelete">删除</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.adblockerlocale[entity.locale.length]['locale']" name="localeTit" readonly>
+                                        <div class="ref-btn-wrap">
+                                            <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'adblocker', 'adblockerlocale', 'locale', entity.adblockerlocale.length)"></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td class="ref-actions">
+                                        <!--<input type="checkbox">-->
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+        </div>
+    </form>
+</div>

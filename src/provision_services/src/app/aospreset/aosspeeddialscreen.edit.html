@@ -1,0 +1,164 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="provision_form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">控制台标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">客户端显示: </label>
+                            <!--
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.name" placeholder="">
+                            </div>
+                            -->
+                            <div class="col-sm-6">
+                                <label class="control-label" style="padding-right: 20px;"><input type="radio" ng-model="entity.sid" value="0" name="screen_id"><span style="padding-left: 5px;">0</span></label>
+                                <label class="control-label" style="padding-right: 20px;"><input type="radio" ng-model="entity.sid" value="1" name="screen_id"><span style="padding-left: 5px;">1</span></label>
+                                <label class="control-label" style="padding-right: 20px;"><input type="radio" ng-model="entity.sid" value="2" name="screen_id"><span style="padding-left: 5px;">2</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>快捷方式</h5>
+                </div>
+                <div collapse="isCollapse2">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-aosspeeddial">
+                                    <thead>
+                                    <tr>
+                                        <th>aosspeeddial</th>
+                                        <th>Order</th>
+                                        <!--<th>项目名称</th>-->
+                                        <!--<th>Locales</th>-->
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.aosspeeddial">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="aosspeeddialTitle" ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'aospreset', 'aosspeeddial', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'aospreset', 'aosspeeddial', 'title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'aospreset', 'aosspeeddial', 'title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text"name="aosspeeddialOrder" class="form-control inline-ref-order-cell" ng-model="refItem.order">
+                                        </td>
+                                        <!--<td>{{refItem.aospackage}}</td>-->
+                                        <!--<td>{{refItem.aoslocale}}</td>-->
+                                        <td class="ref-actions">
+                                            <input type="checkbox"name="aosspeeddialDelete" ng-model="refItem.isDelete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="aosspeeddialTit" class="form-control inline-ref-input-cell" ng-model="entity.aosspeeddial[entity.aosspeeddial.length]['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'aospreset', 'aosspeeddial', 'title', entity.aosspeeddial.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'aospreset', 'aosspeeddial', 'title', entity.aosspeeddial.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!--<input type="text" class="form-control inline-ref-order-cell" ng-model="entity.aosspeeddial[entity.aosspeeddial.length]['order']">-->
+                                        </td>
+                                        <!--<td></td>-->
+                                        <!--<td></td>-->
+                                        <td class="ref-actions">
+                                            <!--<input type="checkbox">-->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse3 = !isCollapse3">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>快捷方式文件夹</h5>
+                </div>
+                <div collapse="isCollapse3">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-aosspeeddialfolder">
+                                    <thead>
+                                    <tr>
+                                        <th>aosspeeddialfolder</th>
+                                        <th>Order</th>
+                                        <!--<th>项目名称</th>-->
+                                        <!--<th>Locales</th>-->
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.aosspeeddialfolder">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="aosspeeddialfolderTitle" ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'aospreset', 'aosspeeddialfolder', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'aospreset', 'aosspeeddialfolder', 'title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'aospreset', 'aosspeeddialfolder', 'title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="aosspeeddialfolderOrder" class="form-control inline-ref-order-cell" ng-model="refItem.order">
+                                        </td>
+                                        <!--<td>{{refItem.aospackage}}</td>-->
+                                        <!--<td>{{refItem.aoslocale}}</td>-->
+                                        <td class="ref-actions">
+                                            <input type="checkbox" name="aosspeeddialfolderDelete" ng-model="refItem.isDelete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="aosspeeddialfolderTit" class="form-control inline-ref-input-cell" ng-model="entity.aosspeeddialfolder[entity.aosspeeddialfolder.length]['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'aospreset', 'aosspeeddialfolder', 'title', entity.aosspeeddialfolder.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'aospreset', 'aosspeeddialfolder', 'title', entity.aosspeeddialfolder.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!--<input type="text" class="form-control inline-ref-order-cell" ng-model="entity.aosspeeddialfolder[entity.aosspeeddialfolder.length]['order']">-->
+                                        </td>
+                                        <!--<td></td>-->
+                                        <!--<td></td>-->
+                                        <td class="ref-actions">
+                                            <!--<input type="checkbox">-->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+            <!-- <button class="btn btn-default right" ng-click="saveAndContinueEdit()">保存并继续编辑</button> -->
+            <button class="btn btn-default right" dp-form-submit="saveAsNew" ng-if="isEditState && !isPopup()" has-permission="add">保存为新的</button>
+        </div>
+    </form>
+</div>

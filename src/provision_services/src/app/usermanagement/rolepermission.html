@@ -1,0 +1,30 @@
+<form action="" ng-submit="submit()">
+    <div class="panel panel-default">
+        <div class="panel-heading">{{feature.title}}</div>
+        <div class="panel-body bg-gray">
+            <div class="row">
+                <div class="col-xs-2 mb-n"  ng-repeat="item in feature.items">
+                    <div class="permiss-item">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" value="" ng-model="item.checked" ng-disabled="item.disabled"> {{item.name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-repeat="permission in permissions">
+        <div class="panel-heading">{{permission.title}}</div>
+        <div class="panel-body bg-gray">
+            <div class="permiss-mod" ng-repeat="item in permission.items">
+                <div class="permiss-mod-title">{{item.model}}</div>
+                <div class="permiss-mod-con">
+                    <label class="permiss-mod-item" ng-repeat="per in item.actions">
+                        <input type="checkbox" value="" ng-model="per.checked" ng-disabled="per.disabled">{{per.name}}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success" has-feature="grant-perms-to-group">Submit</button>
+</form>

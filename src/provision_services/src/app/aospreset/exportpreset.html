@@ -1,0 +1,29 @@
+<div class="export-wrap">
+    <div class="img-wrap"><img src="assets/images/exportxml.png" alt=""></div>
+    <div class="dropdown-wrap">
+        <cascade-dropdown selected-model="selectOptions" select-name="selectName" select-label="selectLabel" on-selected="updateSelection(node, isInit)"></cascade-dropdown>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Version Code</label>
+            <div class="col-sm-6">
+                <input type="text" name="" ng-model="version_code" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">国家</label>
+            <div class="col-sm-6">
+                <select ng-options="country.display_value for country in countries " ng-model="country"></select>
+            </div>
+        </div>
+        <div class="form-group allxml-wrap">
+            <label class="col-sm-4 control-label">Locales</label>
+            <div class="col-sm-6">
+                <label ng-repeat="item in locales">
+                    <input type="checkbox" name="type" value="{{item.value}}" ng-model="item.checked"/>{{item.display_value}}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="btn-wrap">
+        <a type="button" class="btn btn-success btn-lg export-btn" ng-href="{{downloadUrl()}}" ng-click="checkUrl()" has-feature="aospreset-exportpreset-export">Export</a>
+    </div>
+</div>

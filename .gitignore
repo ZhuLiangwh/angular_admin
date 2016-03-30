@@ -1,0 +1,73 @@
+.idea/
+.sass-cache
+node_modules
+build
+
+src/vendor
+src/testData
+src/css/app.css
+src/css/maps
+
+##############################
+#  provision_services #
+##############################
+src/provision_services/build
+src/provision_services/src/vendor
+src/provision_services/src/css/app.css
+src/provision_services/src/css/maps
+
+##############################
+#  square_console #
+##############################
+src/square_console/build
+src/square_console/src/vendor
+src/square_console/src/css/app.css
+src/square_console/src/css/maps
+
+##############################
+#  auth #
+##############################
+src/auth/build
+src/auth/src/vendor
+src/auth/src/css/app.css
+src/auth/src/css/maps
+
+##############################
+#  homeadmin #
+##############################
+src/homeadmin/build
+src/homeadmin/src/vendor
+src/homeadmin/src/css/app.css
+src/homeadmin/src/css/maps
+
+##############################
+#  pushadmin #
+##############################
+src/pushadmin/build
+src/pushadmin/src/vendor
+src/pushadmin/src/css/app.css
+src/pushadmin/src/css/maps
+
+##############################
+#  webopadmin #
+##############################
+src/webopadmin/build
+src/webopadmin/src/vendor
+src/webopadmin/src/css/app.css
+src/webopadmin/src/css/maps
+
+##############################
+#  ios_console #
+##############################
+src/ios_console/build
+src/ios_console/src/vendor
+src/ios_console/src/css/app.css
+src/ios_console/src/css/maps
+
+##############################
+#  turbotservice #
+##############################
+src/turbot_admin/build
+src/turbot_admin/src/vendor
+src/turbot_admin/src/css/app.css
+src/turbot_admin/src/css/maps

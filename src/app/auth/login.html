@@ -1,0 +1,24 @@
+<div class="login login-section">
+    <div class="login-content" >
+        <div class="section-title">
+            <h3 class="login-logo"></h3>
+            <div class="login_messsage" ng-show="hasError">
+                {{errorMessage}}
+            </div>
+        </div>
+
+        <form ng-submit="submit();" name="login">
+            <!--<select class="form-control" ng-change="selectAction()" ng-model="vm.value" ng-options="domain.label for domain in vm.api">-->
+                <!--<option value="">-&#45;&#45;请选择服务器-&#45;&#45;</option>-->
+            <!--</select>-->
+            <input type="username" ng-model="credentials.username" ng-focus placeholder="Username" required="true" class="form-control login-input">
+            <span class="field_msg"></span>
+
+
+            <input type="password" ng-model="credentials.password" ng-focus  class="form-control login-input" required="true" placeholder="Password" >
+            <span class="field_msg"></span>
+
+            <button type="submit" class="btn btn-success login-btn">Login &nbsp;</button>
+        </form>
+    </div>
+</div>

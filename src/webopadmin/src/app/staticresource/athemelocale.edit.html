@@ -1,0 +1,31 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="athemelocale_form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Locale Name: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="locale" class="form-control" ng-model="entity.locale" required="">
+                            </div>
+                        </div>
+                       <div class="form-group">
+                            <label class="col-sm-3 control-label">Theme/Theme分类/Theme专题名称: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="name" class="form-control" ng-model="entity.name" required="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+        </div>
+    </form>
+</div>

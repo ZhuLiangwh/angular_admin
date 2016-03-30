@@ -1,0 +1,38 @@
+<form action="" ng-submit="submit()">
+    <ul class="nav nav-tabs">
+        <li role="presentation" ng-class="{ active:current === $index }" ng-repeat="project in projects" ng-click="toggleProject($index)"><a href="javascript:;">{{project.display_value}}</a></li>
+    </ul>
+    <div class="tab-content">
+        <div ng-repeat="perm in perms track by $index" ng-show="current === $index">
+            <label class="checkbox-inline checkbox">
+                <input type="checkbox" all-select-dire="{{perm.projectname}}" has-selected="perm.perm_list" all-select-resource="perm.resource"/> 全选
+            </label>
+            <div class="panel panel-default">
+                <div class="panel-heading">{{perm.feature.title}}</div>
+                <div class="panel-body bg-gray">
+                    <div class="col-xs-2 mb-n"  ng-repeat="item in perm.feature.items">
+                        <div class="permiss-item">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="{{perm.projectname}}" value="{{item.value}}" ng-disabled="item.disabled"> {{item.display_value}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default" ng-repeat="permission in perm.items track by $index">
+                <div class="panel-heading">{{permission.title}}</div>
+                <div class="panel-body bg-gray">
+                    <div class="permiss-mod" ng-repeat="item in permission.items">
+                        <div class="permiss-mod-title">{{item.model}}</div>
+                        <div class="permiss-mod-con">
+                            <label class="permiss-mod-item" ng-repeat="per in item.items">
+                                <input type="checkbox" name="{{perm.projectname}}" value="{{per.value}}" ng-disabled="per.disabled">{{per.display_value}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" has-permission="edit">Submit</button>
+</form>

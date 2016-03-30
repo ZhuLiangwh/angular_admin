@@ -1,0 +1,57 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="provision_form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">控制台标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">客户端显示: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.name" name="name" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">地址: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.url" name="url" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">包名: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.packagename" name="package" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">图标: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.icon.title" name="iconTitle" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.icon" ng-click="popUp('edit','staticresource', 'icon', 'title', 0 ,entity.icon.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.icon" ng-click="removeFiled('icon')"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+             <!--<button class="btn btn-default right" ng-click="saveAndContinueEdit()">保存并继续编辑</button>-->
+            <button class="btn btn-default right" dp-form-submit="saveAsNew" ng-if="isEditState && !isPopup()" has-permission="add">保存为新的</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,70 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="provision_form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">平台: </label>
+                            <div class="col-sm-6">
+                                <select ng-model="entity.platform" ng-options="item.value as item.display_value for item in displayInfo.platform">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">规则: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.aosruledata.title" name="aosruledata.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosruledata" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,entity.aosruledata.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosruledata" ng-click="removeFiled('aosruledata')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">分类标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.title" placeholder="请输入文案，文案不能重复！"name="title" required=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">文本主题色: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.color"  placeholder="请填写'#980690'的正确格式" ng-pattern="/^#[0-9a-fA-F]{6}$/"  name="color" required=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">图片资源: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.icon.title" name="icon" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.icon" ng-click="popUp('edit','staticresource', 'icon', 'title', 0 ,entity.icon_id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.icon" ng-click="removeFiled('icon')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">分类排序: </label>
+                            <div class="col-sm-6">
+                                <input type="number" ng-pattern="/^[1-9]\d*$/" class="form-control" ng-model="entity.order" name="order" required="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit">保存</button>
+            <!-- <button class="btn btn-default right" ng-click="saveAndContinueEdit()">保存并继续编辑</button>
+            <button class="btn btn-default right" ng-click="saveAsNew()">保存为新的</button> -->
+        </div>
+    </form>
+</div>

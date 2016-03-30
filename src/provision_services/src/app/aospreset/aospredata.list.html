@@ -1,0 +1,86 @@
+<div class="list-wrap">
+    <div class="list-top clearfix">
+        <button ng-show="!isPopup()" class="btn btn-success right" ng-click="addAospredata()" has-permission="add">添加初始数据</button>
+        <div class="filter-wrap left">
+            <dp-multi-dropdown selected-model="selectOptions" on-selected="filter(node)"></dp-multi-dropdown>
+        </div>
+        <div class="list-datepicker left">
+            <div class="date-selected">
+                <span class="input-group date-picker-select">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.start.dt"
+                           max-date="datePicker.end.dt" is-open="datePicker.start.opened" show-button-bar="false" readonly
+                           ng-required="true"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event, datePicker.start)" ng-disabled="datePicker.end.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </span>
+                <label class="date-picker-text">—</label>
+                <span class="input-group date-picker-select end-date">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.end.dt"
+                           min-date="datePicker.start.dt" max-date="datePicker.end.max" is-open="datePicker.end.opened"
+                           show-button-bar="false" readonly ng-required="true"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event, datePicker.end)" ng-disabled="datePicker.start.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="search-wrap left">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" type="text" ng-model="search.string">
+                    <span class="glyphicon glyphicon-search form-control-feedback" ng-disabled="isLoading" ng-click="goSearch()"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-content" cc-loading-layer="!aospredataTableParams.settings().$loading">
+        <div ng-show="!aospredataTableParams.settings().$loading && items && !items.length" class="no-data">The list is empty, nothing to do！ </div>
+        <table ng-table="aospredataTableParams" class="table table-bordered trans-table" template-pagination="app/layouts/pagination.html">
+            <thead>
+            <tr>
+                <th width="50"><input type="checkbox" all-select-dire="predata" has-selected="vm.listChecked" all-select-resource="items"/></th>
+                <th width="60">ID<dp-sort-field sort-by="id" sort="desc" params="apiParams"></dp-sort-field></th>
+                <th>Locales</th>
+                <th width="200">控制台标题</th>
+                <th width="200">项目名称</th>
+                <th width="100">测试环境</th>
+                <th width="100">正式环境</th>
+                <th>创建时间<dp-sort-field sort-by="first_created" sort="desc" params="apiParams"></dp-sort-field></th>
+                <th>修改时间<dp-sort-field sort-by="last_modified" sort="desc" params="apiParams"></dp-sort-field></th>
+                <th>发布线上时间</th>
+                <th width="100">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in items">
+                <td><input type="checkbox" name="predata" value="{{item.id}}"/></td>
+                <td class="text-align-c">{{item.id}}</td>
+                <td>{{item.aoslocale}}</td>
+                <td>{{item.title}}<i ng-if="item.release" ng-show="item.release==1" tooltip="未发布到测试环境" class="fa fa-exclamation-circle" ng-class="{'fa-exclamation-relase':item.release==2}"></i><i ng-show="item.release==2" ng-if="item.release" tooltip="未发布到正式环境" class="fa fa-exclamation-circle" ng-class="{'fa-exclamation-relase':item.release==2}"></i></td>
+                <td>{{item.aospackage}}</td>
+                <td class="text-align-c"><i class="fa" ng-class="item.is_upload_local ? 'fa-check-circle-o' : 'fa-minus-circle'"></i></td>
+                <td class="text-align-c"><i class="fa" ng-class="item.is_upload_ec2 ? 'fa-check-circle-o' : 'fa-minus-circle'"></i></td>
+                <td width="160">{{item.first_created}}</td>
+                <td width="160">{{item.last_modified}}</td>
+                <td width="160">{{item.last_release_ec2}}</td>
+                <td data-title="'Actions'" class="list-table-actions-col">
+                    <a href="" class="btn btn-default left" ng-click="ViewDetail(item)">ViewDetail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="table-footer-btn-wrap left">
+            <button class="btn btn-default" ng-click="deleteFromConsole()" has-permission="delete">从本地删除</button>
+            <button class="btn btn-default" ng-click="uploadToLocale()" has-feature="aospreset-aospredata-upload_local">上传到测试环境</button>
+            <button class="btn btn-default" ng-click="deleteFromLocale()" has-feature="aospreset-aospredata-upload_ec2">从测试环境删除</button>
+            <!-- <button class="btn btn-default" ng-click="uploadToInland()">上传到国内</button>
+            <button class="btn btn-default" ng-click="deleteFromInland()">从国内删除</button> -->
+            <button class="btn btn-default" ng-click="uploadToOverseas()" has-feature="aospreset-aospredata-del_local">上传到正式环境</button>
+            <button class="btn btn-default" ng-click="deleteFromOverseas()" has-feature="aospreset-aospredata-del_ec2">从正式环境删除</button>
+            <a href="{{getDownUrl()}}" class="btn btn-default" has-feature="aospreset-exportpreset-export">导出</a>
+            <span class="list-total-checked">{{vm.listTotal}}中{{vm.listChecked.length}}被选</span>
+        </div>
+        <span class="list-total">共{{vm.listTotal}}条数据</span>
+    </div>
+</div>

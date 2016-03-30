@@ -1,0 +1,102 @@
+<div class="form-wrap" ng-init="webapp_form={}">
+    <form class="edit-form" novalidate dp-form-validator="" name="webapp_form" id="appads_form" dp-after-validator="afterVali">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">控制台标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">应用场景: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="tag" class="form-control" ng-model="entity.tag" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">配置规则:</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="rule_title" class="form-control" ng-model="entity.aosruledata.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosruledata.title && entity.aosruledata.length!=0" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,entity.aosruledata.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosruledata.title && entity.aosruledata.length!=0" ng-click="removeFiled('aosruledata')"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--atheme-->
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>应用推荐列表</h5>
+                </div>
+                <div collapse="isCollapse2">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-icon">
+                                    <thead>
+                                    <tr>
+                                        <th>应用资源</th>
+                                        <th>Order</th>
+                                        <th>uninstallTag</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.applist">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="athemeTitle{{$index}}" dp-dynamic-field-name ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'webads', 'applist', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'webads', 'applist', 'title', $index, refItem.id)"></span>
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control inline-ref-order-cell" name="athemeOrder{{$index}}" dp-dynamic-field-name ng-model="refItem.order">
+                                        </td>
+                                        <td class="ref-actions">
+                                            <input type="checkbox" ng-model="refItem.uninstalltag" name="uninstalltag">
+                                        </td>
+                                        <td class="ref-actions">
+                                            <button type="button" class="btn btn-success mr0" ng-click="deleteRow(refItem)" name="appadsDelete">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="athemeTit" ng-model="entity.applist[entity.applist.length]['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'webads', 'applist', 'title', entity.applist.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td class="ref-actions"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+        </div>
+    </form>
+</div>

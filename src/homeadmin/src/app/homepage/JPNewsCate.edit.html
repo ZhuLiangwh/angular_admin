@@ -1,0 +1,47 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="JPNewsCate_form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">控制台标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" ng-model="entity.title" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">分类名称: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="name" class="form-control" ng-model="entity.name" required>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">排序: </label>
+                            <div class="col-sm-6">
+                                <input type="number" min="0" name="order" class="form-control" ng-model="entity.order">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">推送地区: </label>
+                            <div class="col-sm-8 checkbox">
+                                <label><input type="checkbox" all-select-dire="locale" has-selected="entity.locale" all-select-resource="locales"/>全选
+                                    </label>
+                                <div class="checkbox">
+                                    <label ng-repeat="item in locales" class="col-sm-2"><input type="checkbox" name="locale" value="{{item.value}}">{{item.display_value}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,37 @@
+<div class="user-warp">
+    <!--<form class="form-horizontal" name="createTransForm" ng-submit="createUser()" novalidate>-->
+    <form class="form-horizontal" name="createTransForm" novalidate dp-form-validator="">
+        <div class="form-title">
+            Edit User
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Username</label>
+            <div class="col-sm-7">
+                <input type="email" name="username" placeholder="user name" class="form-control" ng-model="entity.user_name" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Role</label>
+            <div class="col-sm-7">
+                <input type="checkbox" all-select-dire="group" has-selected="entity.group_id" all-select-resource="roles" class="hide"/>
+                <div class="checkbox">
+                    <label ng-repeat="item in roles" class="col-sm-2"><input type="checkbox" name="group" value="{{item.value}}"/>{{item.display_value}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Mark</label>
+            <div class="col-sm-7">
+                <input type="text" placeholder="mark" name="mark" class="form-control" ng-model="entity.mark">
+            </div>
+        </div>
+        <div class="form-footer">
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-7">
+                    <button class="btn btn-default btn-gray" ng-click="cancel()" type="button">Cancel</button>
+                    <button class="btn btn-success ng-scope" dp-form-submit="createUser" type="button">Create User</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

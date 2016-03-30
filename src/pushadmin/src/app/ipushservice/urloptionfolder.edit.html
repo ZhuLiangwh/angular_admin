@@ -1,0 +1,85 @@
+<div class="form-wrap" ng-init="ipushservice_form={}">
+    <form class="edit-form" novalidate dp-form-validator="" name="ipushservice_form" id="ipushservice_form" dp-after-validator="afterVali">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">控制台标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>网址分类：</h5>
+                </div>
+                <div collapse="isCollapse2">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-urloption">
+                                    <thead>
+                                    <tr>
+                                        <th>网址</th>
+                                        <th>排序</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.iurloption">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="urlparamTitl{{$index}}" dp-dynamic-field-name ng-model="refItem['title']" readonly>
+
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'ipushservice', 'iurloption', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'ipushservice', 'iurloption', 'title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'ipushservice', 'iurloption', 'title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-order-cell" name="urloptionOrder{{$index}}" dp-dynamic-field-name ng-model="refItem.order" >
+                                        </td>
+                                        <td class="ref-actions">
+                                            <button type="button" class="btn btn-success mr0" ng-click="deleteRow(refItem)" name="urloptionDelete">Delete</button></td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.iurloption[entity.iurloption.length]['title']" name="urloptionTit" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'ipushservice', 'iurloption', 'title', entity.iurloption.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'ipushservice', 'iurloption', 'title', entity.iurloption.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td class="ref-actions">
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+            <!-- <button class="btn btn-default right" ng-click="saveAndContinueEdit()">保存并继续编辑</button>-->
+            <button class="btn btn-default right" dp-form-submit="saveAsNew" ng-if="isEditState && !isPopup()" has-permission="add">保存为新的</button>
+        </div>
+    </form>
+</div>

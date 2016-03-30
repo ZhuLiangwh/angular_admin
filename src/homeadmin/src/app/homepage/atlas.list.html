@@ -1,0 +1,128 @@
+<div class="list-wrap">
+    <div class="list-top clearfix">
+        <!--<div class="filter-wrap left">-->
+            <!--<cascade-dropdown selected-model="selectOptions" select-name="selectName" select-cache="selectCache" on-selected="filter(node, isInit)" load-data-from-cache="loadDataFromCache()"></cascade-dropdown>-->
+        <!--</div>-->
+        <button ng-show="!isPopup()" class="btn btn-success right" ng-click="addAtlas()" has-permission="add">添加图集</button>
+        <div class="list-datepicker left">
+            <div class="date-selected">
+                    <span class="input-group date-picker-select">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.start.dt"
+                               max-date="datePicker.end.dt" is-open="datePicker.start.opened" show-button-bar="false" readonly
+                               ng-required="true"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, datePicker.start)" ng-disabled="datePicker.end.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </span>
+                <label class="date-picker-text">—</label>
+                    <span class="input-group date-picker-select end-date">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.end.dt"
+                               min-date="datePicker.start.dt" max-date="datePicker.end.max" is-open="datePicker.end.opened"
+                               show-button-bar="false" readonly ng-required="true"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, datePicker.end)" ng-disabled="datePicker.start.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </span>
+            </div>
+        </div>
+        <div class="search-wrap left">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" type="text" ng-model="search.string">
+                    <span class="glyphicon glyphicon-search form-control-feedback" ng-disabled="isLoading" ng-click="goSearch()"></span>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="left" style="margin-left: 15px" class="table-footer-btn-wrap left">-->
+            <!--<button class="btn btn-default" ng-click="deleteFromConsole()" has-permission="delete">从本地删除</button>-->
+            <!--<button class="btn btn-default" ng-click="uploadToLocale()" has-feature="homepage-atlas-upload_local">上传到测试环境</button>-->
+            <!--<button class="btn btn-default" ng-click="deleteFromLocale()" has-feature="homepage-atlas-del_local">从测试环境删除</button>-->
+            <!--<button class="btn btn-default" ng-click="uploadToOverseas()" has-feature="homepage-atlas-upload_ec2">上传到正式环境</button>-->
+            <!--<button class="btn btn-default" ng-click="deleteFromOverseas()" has-feature="homepage-atlas-del_ec2">从正式环境删除</button>-->
+            <!--&lt;!&ndash;<button class="btn btn-default" ng-click="reviewSubmit()" has-feature="homepage-atlas-submit">提交审核</button>&ndash;&gt;-->
+            <!--<span>共{{vm.listTotal}}条数据</span>-->
+            <!--<span class="list-total-checked">{{vm.listTotal}}中{{vm.listChecked.length}}被选</span>-->
+        <!--</div>-->
+
+    </div>
+    <div class="list-content" cc-loading-layer="!atlasTableParams.settings().$loading">
+        <div ng-show="!atlasTableParams.settings().$loading && items && !items.length" class="no-data">The list is empty, nothing to do！ </div>
+        <table ng-table="atlasTableParams" class="table table-bordered trans-table" template-pagination="app/layouts/pagination.html">
+            <thead>
+            <tr>
+                <th width="3%"><input type="checkbox" all-select-dire="predata" has-selected="vm.listChecked" all-select-resource="items"/></th>
+                <!--<th width="60">ID<dp-sort-field sort-by="id" sort="desc" params="apiParams"></dp-sort-field></th>-->
+                <th width="5%">ID</th>
+                <th>图集标题</th>
+                <th width="28%">图集资源</th>
+                <th>图集链接</th>
+                <th width="10%">发布地区</th>
+                <!--<th width="7%">审核状态</th>-->
+                <th width="10%">创建时间</th>
+                <th width="10%">修改时间</th>
+                <th width="5%">测试环境</th>
+                <th width="5%">正式环境</th>
+                <th width="5%">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in items">
+                <td class="text-align-c"><input type="checkbox" name="predata" value="{{item.id}}"/></td>
+                <td class="text-align-c" width="100">{{item.id}}<i ng-if="item.release" ng-show="item.release==1" tooltip="未发布到测试环境" class="fa fa-exclamation-circle" ng-class="{'fa-exclamation-relase':item.release==2}"></i><i ng-show="item.release==2" ng-if="item.release" tooltip="未发布到正式环境" class="fa fa-exclamation-circle" ng-class="{'fa-exclamation-relase':item.release==2}"></i></td>
+                <td>{{item.title}}</td>
+                <td class="center">
+                    <ul class="icon-imglist">
+                        <li><img class="icon-image" ng-src="{{item.atlas_1}}" alt=""></li>
+                        <li><img class="icon-image" ng-src="{{item.atlas_2}}" alt=""></li>
+                        <li><img class="icon-image" ng-src="{{item.atlas_3}}" alt=""></li>
+                    </ul>
+                </td>
+                <td>{{item.url}}</td>
+                <td>{{item.aoslocale}}</td>
+                <!--<td><span ng-show="item.checked===0">未提交</span><span ng-show="item.checked===1">待审核</span><span ng-show="item.checked===2">审核未通过</span><span ng-show="item.checked===3">审核通过</span></td>-->
+                <td>{{item.first_created}}</td>
+                <td>{{item.last_modified}}</td>
+                <td class="text-align-c"><i class="fa" ng-class="item.is_upload_local ? 'fa-check-circle-o' : 'fa-minus-circle'"></i></td>
+                <td class="text-align-c"><i class="fa" ng-class="item.is_upload_ec2 ? 'fa-check-circle-o' : 'fa-minus-circle'"></i></td>
+                <td data-title="'Action'" class="list-table-actions-col">
+                    <a href="" class="btn btn-default left" ng-click="ViewDetail(item)">ViewDetail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!--<div class="list-top clearfix">-->
+            <!--<div class="list-datepicker left">-->
+                <!--<div class="date-selected">-->
+                    <!--<span class="input-group date-picker-select">-->
+                        <!--<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.start.dt"-->
+                               <!--max-date="datePicker.end.dt" is-open="datePicker.start.opened" show-button-bar="false" readonly-->
+                               <!--ng-required="true"/>-->
+                        <!--<span class="input-group-btn">-->
+                            <!--<button type="button" class="btn btn-default" ng-click="open($event, datePicker.start)" ng-disabled="datePicker.end.opened"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                        <!--</span>-->
+                    <!--</span>-->
+                    <!--<label class="date-picker-text">—</label>-->
+                    <!--<span class="input-group date-picker-select end-date">-->
+                        <!--<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.end.dt"-->
+                               <!--min-date="datePicker.start.dt" max-date="datePicker.end.max" is-open="datePicker.end.opened"-->
+                               <!--show-button-bar="false" readonly ng-required="true"/>-->
+                        <!--<span class="input-group-btn">-->
+                            <!--<button type="button" class="btn btn-default" ng-click="open($event, datePicker.end)" ng-disabled="datePicker.start.opened"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                        <!--</span>-->
+                    <!--</span>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="table-footer-btn-wrap left">
+            <button class="btn btn-default" ng-click="deleteFromConsole()" has-permission="delete">从本地删除</button>
+            <button class="btn btn-default" ng-click="uploadToLocale()" has-feature="homepage-atlas-upload_local">上传到测试环境</button>
+            <button class="btn btn-default" ng-click="deleteFromLocale()" has-feature="homepage-atlas-del_local">从测试环境删除</button>
+            <button class="btn btn-default" ng-click="uploadToOverseas()" has-feature="homepage-atlas-upload_ec2">上传到正式环境</button>
+            <button class="btn btn-default" ng-click="deleteFromOverseas()" has-feature="homepage-atlas-del_ec2">从正式环境删除</button>
+            <!--<button class="btn btn-default" ng-click="reviewSubmit()" has-feature="homepage-atlas-submit">提交审核</button>-->
+            <span class="list-total-checked">{{vm.listTotal}}中{{vm.listChecked.length}}被选</span>
+        </div>
+        <span class="list-total">共{{vm.listTotal}}条数据</span>
+    </div>
+</div>

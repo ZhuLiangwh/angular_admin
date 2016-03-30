@@ -1,0 +1,75 @@
+<div class="chart">
+    <div class="chart-head clearfix" style="margin-bottom:16px;">
+        <div class="filter-wrap left">
+            <dp-multi-dropdown selected-model="multiSelectOptions" on-selected="filter(node, isInit)"></dp-multi-dropdown>
+        </div>
+
+        <div class="list-datepicker left">
+            <div class="date-selected">
+                <span class="input-group date-picker-select">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.start.dt" max-date="datePicker.end.dt" is-open="datePicker.start.opened" show-button-bar="false" readonly/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event, datePicker.start)" ng-disabled="datePicker.end.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </span>
+                <label class="date-picker-text">—</label>
+                <span class="input-group date-picker-select end-date">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.end.dt" min-date="datePicker.start.dt" max-date="datePicker.end.max" is-open="datePicker.end.opened" show-button-bar="false" readonly/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event, datePicker.end)" ng-disabled="datePicker.start.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </span>
+            </div>
+        </div>
+        <!-- 多选 -->
+        <div class="dropdown custom-select">
+            <div class="input-group" ng-click="vm.dropdown = !vm.dropdown">
+                <input type="text" class="form-control" value="请选择分类" readonly/>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
+            </div>
+             <div class="dropdown-menu collapse" ng-class="{in: vm.dropdown}" ng-blur="vm.dropdown = false">
+                 <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>分类名</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="cate in vm.category" ng-click="cate.checked = !cate.checked">
+                            <td><input type="checkbox" ng-checked="cate.checked"></td>
+                            <td>{{cate.name}}</td>
+                        </tr>
+                    </tbody>
+                 </table>
+                <div>
+                    <span class="btn btn-success" ng-click="subcate()">确定</span>
+                </div>
+             </div>
+        </div>
+        <div class="search-wrap left">
+            <div class="form-group">
+                <div class="input-group">
+                    
+                    <input class="form-control" placeholder="请输入广告源ID" type="text" ng-model="searchKeyword">
+                    <span class="glyphicon glyphicon-search form-control-feedback" ng-click="goSearch()"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-content">
+        <div class="widget-box">
+            <div class="widget-title" ng-click="isCollapse0 = !isCollapse0">
+                <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                <h5>广告源统计</h5>
+            </div>
+            <div class="widget-content" collapse="isCollapse0">
+                <dp-high-chart chart-config="chartConfig0"></dp-high-chart>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <a class="btn btn-success" ng-href="{{exportUrl()}}">导出csv</a>
+    </div>
+</div>

@@ -1,0 +1,138 @@
+<div class="form-wrap">
+    <div class="form-content">
+        <form class="edit-form" novalidate dp-form-validator=""  name="provision_form" dp-after-validator="afterVali">
+            <!-- 编辑规则 -->
+            <div class="widget-box">
+                <div class="widget-title">
+                    <h5>编辑规则</h5>
+                </div>
+                <div class="widget-content">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">平台选择: </label>
+                        <div class="col-sm-5">
+                            <select ng-model="entity.platform" ng-options="item.value as item.display_value for item in displayInfo.platform.items">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">项目名称: </label>
+                        <div class="col-sm-5">
+                            <div class="checkbox">
+                                <label ng-repeat="cate in displayInfo.platform.convertItems[entity.platform].children.items">
+                                    <input type="checkbox" name="package" ng-model="checkbox.package[entity.platform][cate.value]">
+                                    <span class="form-input-text">{{cate.display_value}}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">标题: </label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" ng-model="entity.title" name="title" required="">
+                        </div>
+                        <div class="col-sm-5 control-tip">不要修改已有的产品名称,避免影响其它产品</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">最小版本号: </label>
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" ng-model="entity.min_version" placeholder="起始值为0" name="min_version" required="" min="0">
+                        </div>
+                        <div class="col-sm-5 control-tip">起始值为0</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">最大版本号: </label>
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" ng-model="entity.max_version" placeholder="默认为最大值" name="max_version">
+                        </div>
+                        <div class="col-sm-5 control-tip">不填写默认为最大值</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 运营商  -->
+            <div class="widget-box">
+                <div class="widget-title">
+                    <h5>运营商</h5>
+                    <label><input type="checkbox" all-select-dire="operator" has-selected="entity.operator" all-select-resource="operators"/>全选</label>
+                    <input type="text" ng-model="operators_filter" name="operator_filter" class="inputRight_filter" placeholder="快速搜索"/>
+                </div>
+                <div class="widget-content">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label ng-repeat="item in operators" class="col-sm-2"><input type="checkbox" name="operator" value="{{item.value}}"/>{{item.display_value}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 渠道 -->
+            <div class="widget-box">
+                <div class="widget-title">
+                    <h5>渠道</h5>
+                    <label><input type="checkbox" all-select-dire="source" has-selected="entity.source" all-select-resource="sources"/>全选</label>
+                    <input type="text" ng-model="sources_filter" name="source_filter" class="inputRight_filter" placeholder="快速搜索"/>
+                </div>
+                <div class="widget-content">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label ng-repeat="item in sources" class="col-sm-2"><input type="checkbox" name="source" value="{{item.value}}"/>{{item.display_value}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 语言_地区 -->
+            <div class="widget-box">
+                <div class="widget-title">
+                    <h5>Locales</h5>
+                    <label><input type="checkbox" all-select-dire="locale" has-selected="entity.locale" all-select-resource="locales"/>全选</label>
+                    <input type="text" ng-model="locales_filter" name="locale_filter" class="inputRight_filter" placeholder="快速搜索"/>
+                </div>
+                <div class="widget-content">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label ng-repeat="item in locales" class="col-sm-2"><input type="checkbox" name="locale" value="{{item.value}}"/>{{item.display_value}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 编辑规则底部 -->
+            <div class="widget-box">
+                <div class="widget-content">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">最小系统值: </label>
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" ng-model="entity.min_value" placeholder="0" name="min_value"  min="0">
+                        </div>
+                        <div class="col-sm-5 control-tip">适应最小系统值</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">最大系统值: </label>
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" ng-model="entity.max_value" placeholder="0" name="max_value"  max="100">
+                        </div>
+                        <div class="col-sm-5 control-tip">适应最大系统值</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">灰度比例: </label>
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" ng-model="entity.gray_scale" placeholder="100" rule="int" name="gray_scale" min="0" max="100">
+                        </div>
+                        <div class="col-sm-5 control-tip">0到100间的整数</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">灰度起点: </label>
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" ng-model="entity.gray_start" placeholder="1" rule="int" name="gray_start"  min="0" max="100">
+                        </div>
+                        <div class="col-sm-5 control-tip">要求为大于0的整数且必须小于100减灰度比例</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-btn-wrap">
+                <!--<button class="btn btn-success right" ng-click="save()">保存</button>-->
+                <button type="submit" class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+                <!--<button type="submit" class="btn btn-default right" dp-form-submit="saveAndContinueEdit">保存并继续编辑</button>-->
+                <!--<button type="submit" class="btn btn-default right" dp-form-submit="saveAsNew">保存为新的</button>-->
+            </div>
+        </form>
+    </div>
+</div>
+</div>

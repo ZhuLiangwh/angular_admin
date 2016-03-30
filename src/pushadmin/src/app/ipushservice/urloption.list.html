@@ -1,0 +1,43 @@
+<div class="list-wrap">
+    <div class="list-top clearfix">
+        <button ng-show="!isPopup()" class="btn btn-success right" ng-click="addUrloption()" has-permission="add">添加网址选项</button>
+        <div class="search-wrap left">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" type="text" ng-model="search.string">
+                    <span class="glyphicon glyphicon-search form-control-feedback" ng-disabled="isLoading" ng-click="goSearch()"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-content" cc-loading-layer="!iurloptionTableParams.settings().$loading">
+        <div ng-show="!iurloptionTableParams.settings().$loading && items && !items.length" class="no-data">The list is empty, nothing to do！ </div>
+        <table ng-table="iurloptionTableParams" class="table table-bordered trans-table" template-pagination="app/layouts/pagination.html">
+            <thead>
+            <tr>
+                <th width="3%"><input type="checkbox" all-select-dire="iurloption" has-selected="vm.listChecked" all-select-resource="items"/></th>
+                <th width="5%">ID<dp-sort-field sort-by="id" sort="desc" params="apiParams"></dp-sort-field></th>
+                <th width="10%">控制台标题</th>
+                <th>地址</th>
+                <th width="5%">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in items" ng-click="choice(item)">
+                <td><input type="checkbox" name="iurloption" value="{{item.id}}"/></td>
+                <td class="text-align-c">{{item.id}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.url}}</td>
+                <td data-title="'Action'" class="list-table-actions-col">
+                    <a href="" class="btn btn-default left" ng-click="ViewDetail(item)">ViewDetail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="table-footer-btn-wrap left">
+            <button class="btn btn-success" ng-click="delete()" has-permission="delete">删除</button>
+            <span class="list-total-checked">{{vm.listTotal}}中{{vm.listChecked.length}}被选</span>
+        </div>
+        <span class="list-total">共{{vm.listTotal}}条数据</span>
+    </div>
+</div>

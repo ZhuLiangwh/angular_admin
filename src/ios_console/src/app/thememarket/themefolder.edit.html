@@ -1,0 +1,167 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="theme_form" dp-after-validator="afterVali">
+        <div class="widget-box">
+            <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                <h5>必填项</h5>
+            </div>
+            <div collapse="isCollapse1">
+                <div class="widget-content">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">控制台标题: </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="title" class="form-control" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Theme文件夹标题: </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" ng-model="entity.name" name="name" placeholder="(EN_US)" ng-pattern="/^[a-zA-Z]+$/" required="">
+                        </div>
+                        <div class="col-sm-4 control-tip">请用英文填写</div>
+                    </div>
+                    <div class="form-group">
+                            <label class="col-sm-2 control-label">尺寸: </label>
+                            <div class="col-sm-5">
+                                <select name="size" ng-model="entity.size">
+                                    <option ng-repeat="option in size.availableOptions" value="{{option.value}}">{{option.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">付费类型: </label>
+                        <div class="col-sm-5">
+                            <select name="isfree" ng-model="entity.isfree" ng-options="o.value as o.name for o in isfree"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">缩略图: </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="icon" ng-model="entity.icon.title" readonly>
+                        </div>
+                        <div class="col-sm-4 clear_col_margin">
+                            <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                            <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.icon.title && entity.icon.length!=0" ng-click="popUp('edit','staticresource', 'icon', 'title', 0 ,entity.icon.id, true)"></span>
+                            <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                            <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.icon.title && entity.icon.length!=0" ng-click="removeFiled('icon')"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse3 = !isCollapse3">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>Theme文件夹标题本地化</h5>
+                </div>
+                <div collapse="isCollapse3">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-theme">
+                                    <thead>
+                                    <tr>
+                                        <th>Locale名称</th>
+                                        <th>Theme文件夹标题</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                   <tbody>
+                                    <tr ng-repeat="refItem in entity.themelocale">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="urlparamTitle" ng-model="refItem['locale']" readonly>
+                                            <div class="ref-btn-wrap">  
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'thememarket', 'themelocale', 'locale', $index)"></span>  
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'thememarket', 'themelocale', 'locale', $index, refItem.id)"></span>                                               
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-order-cell" name="themefolderOrder" ng-model="refItem.name" readonly>
+                                        </td>
+                                        <td class="ref-actions">
+                                            <!-- <button class="btn btn-default" name="themelocaleDelete" ng-click="deleteRow(refItem)">删除</button> -->
+                                             <input type="checkbox" name="themelocale_isDelete" ng-model="refItem.isDelete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.themelocale[entity.locale.length]['locale']" name="urlparamTit" readonly>
+                                          
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'thememarket', 'themelocale', 'locale', entity.themelocale.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td class="ref-actions">
+                                            <!--<input type="checkbox">-->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>Theme项</h5>
+                </div>
+                <div collapse="isCollapse2">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-theme">
+                                    <thead>
+                                    <tr>
+                                        <th>Theme项</th>
+                                        <th>Order</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.theme">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="themeTitle" ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'thememarket', 'theme', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'thememarket', 'theme', 'title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'thememarket', 'theme', 'title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-order-cell" name="themeOrder" ng-model="refItem.order">
+                                        </td>
+                                        <td class="ref-actions">
+                                            <input type="checkbox" name="themedetail_isDelete" ng-model="refItem.isDelete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.theme[entity.theme.length]['title']" name="themeTit" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'thememarket', 'theme', 'title', entity.theme.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'thememarket', 'theme', 'title', entity.theme.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td class="ref-actions">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+            <button class="btn btn-default right" dp-form-submit="saveAsNew" ng-if="isEditState && !isPopup()" has-permission="add">保存为新的</button>
+        </div>
+    </form>
+</div>

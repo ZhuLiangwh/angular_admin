@@ -1,0 +1,332 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="provision_form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">控制台标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">首页: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="first_page" class="form-control" ng-model="entity.home_page" placeholder="Dolphin web官网" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">功能介绍链接: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="function_link" class="form-control" ng-model="entity.tutorial" placeholder="Dolphin web官网" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">规则: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="rule_title" class="form-control" ng-model="entity.aosruledata.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosruledata" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,entity.aosruledata.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosruledata" ng-click="removeFiled('aosruledata')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">手势配置: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="gesture_title" class="form-control" ng-model="entity.aosgesture.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aospreset', 'aosgesture', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosgesture" ng-click="popUp('edit','aospreset', 'aosgesture', 'title', 0 ,entity.aosgesture.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aospreset', 'aosgesture', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosgesture" ng-click="removeFiled('aosgesture')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">策略: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="aosstrategy_title" class="form-control" ng-model="entity.aosstrategy.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aospreset', 'aosstrategy', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosstrategy" ng-click="popUp('edit','aospreset', 'aosstrategy', 'title', 0 ,entity.aosstrategy.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aospreset', 'aosstrategy', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosstrategy" ng-click="removeFiled('aosstrategy')"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>选填项</h5>
+                </div>
+                <div collapse="isCollapse2">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">更多主题地址: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="theme_link" class="form-control" ng-model="entity.more_theme_link" placeholder="Theme web链接">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">更多插件地址: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="addon_link" class="form-control" ng-model="entity.more_addon_link" placeholder="Add on web链接">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">检查更新地址: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="update_link" class="form-control" ng-model="entity.check_update_link" placeholder="Google play下载页面">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">更多评分地址: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="rate_me_link" class="form-control" ng-model="entity.rate_me_link" placeholder="Google Play评分页面">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">热门应用地址: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="hotapps_link" class="form-control" ng-model="entity.hotapps" placeholder="Find apps web链接">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">About: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="about_link" class="form-control" ng-model="entity.about" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">分享: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="share_link" class="form-control" ng-model="entity.aossharecontent.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aospreset', 'aossharecontent', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aossharecontent" ng-click="popUp('edit','aospreset', 'aossharecontent', 'title', 0 ,entity.aossharecontent.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aospreset', 'aossharecontent', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aossharecontent" ng-click="removeFiled('aossharecontent')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">桌面: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="desktop" ng-model="entity.aosspeeddialdesktop.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aospreset', 'aosspeeddialdesktop', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosspeeddialdesktop" ng-click="popUp('edit','aospreset', 'aosspeeddialdesktop', 'title', 0 ,entity.aosspeeddialdesktop.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aospreset', 'aosspeeddialdesktop', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosspeeddialdesktop" ng-click="removeFiled('aosspeeddialdesktop')"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse4 = !isCollapse4">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>Search engine分类</h5>
+                </div>
+                <div collapse="isCollapse4">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-aossearcherfolder">
+                                    <thead>
+                                    <tr>
+                                        <th>aossearcherfolder</th>
+                                        <th>Order</th>
+                                        <!--<th>项目名称</th>-->
+                                        <!--<th>Locales</th>-->
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.aossearcherfolder">
+                                        <td>
+                                            <input type="text" name="aossearcherfolder_title" class="form-control inline-ref-input-cell" ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'aospreset', 'aossearcherfolder', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'aospreset', 'aossearcherfolder', 'title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'aospreset', 'aossearcherfolder', 'title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="aossearcherfolder_order" class="form-control inline-ref-order-cell" ng-model="refItem.order">
+                                        </td>
+                                        <!--<td>{{refItem.aospackage}}</td>-->
+                                        <!--<td>{{refItem.aoslocale}}</td>-->
+                                        <td class="ref-actions">
+                                            <input type="checkbox" name="aossearcherfolder_delete" ng-model="refItem.isDelete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.aossearcherfolder[entity.aossearcherfolder.length]['title']" name="searcherfolder_tit" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'aospreset', 'aossearcherfolder','title', entity.aossearcherfolder.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'aospreset', 'aossearcherfolder', 'title', entity.aossearcherfolder.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!--<input type="text" class="form-control inline-ref-order-cell" ng-model="entity.aossearcherfolder[entity.aossearcherfolder.length]['order']">-->
+                                        </td>
+                                        <!--<td></td>-->
+                                        <!--<td></td>-->
+                                        <td class="ref-actions">
+                                            <!--<input type="checkbox">-->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse5 = !isCollapse5">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>书签</h5>
+                </div>
+                <div collapse="isCollapse5">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-aosbookmark">
+                                    <thead>
+                                    <tr>
+                                        <th>aosbookmark</th>
+                                        <th>Order</th>
+                                        <!--<th>项目名称</th>-->
+                                        <!--<th>Locales</th>-->
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.aosbookmark">
+                                        <td>
+                                            <input type="text" name="aosbookmark_title" class="form-control inline-ref-input-cell" ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'aospreset', 'aosbookmark', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'aospreset', 'aosbookmark', 'title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'aospreset', 'aosbookmark', 'title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="aosbookmark_order" class="form-control inline-ref-order-cell" ng-model="refItem.order">
+                                        </td>
+                                        <!--<td>{{refItem.aospackage}}</td>-->
+                                        <!--<td>{{refItem.aoslocale}}</td>-->
+                                        <td class="ref-actions">
+                                            <input type="checkbox" name="aosbookmark_isDelete" ng-model="refItem.isDelete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="aosbookmark_tit" class="form-control inline-ref-input-cell" ng-model="entity.aosbookmark[entity.aosbookmark.length]['title']" readonly>
+                                            <div class="ref-btn-wrap" readonly>
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'aospreset', 'aosbookmark', 'title' , entity.aosbookmark.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'aospreset', 'aosbookmark', 'title' , entity.aosbookmark.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!--<input type="text" class="form-control inline-ref-order-cell" ng-model="entity.aosbookmark[entity.aosbookmark.length]['order']">-->
+                                        </td>
+                                        <!--<td></td>-->
+                                        <!--<td></td>-->
+                                        <td class="ref-actions">
+                                            <!--<input type="checkbox">-->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse6 = !isCollapse6">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>书签文件夹</h5>
+                </div>
+                <div collapse="isCollapse6">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-aosbookmarkfolder">
+                                    <thead>
+                                    <tr>
+                                        <th>aosbookmarkfolder</th>
+                                        <th>Order</th>
+                                        <!--<th>项目名称</th>-->
+                                        <!--<th>Locales</th>-->
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.aosbookmarkfolder">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="aosbookmarkfolder_title" ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'aospreset', 'aosbookmarkfolder','title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'aospreset', 'aosbookmarkfolder','title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'aospreset', 'aosbookmarkfolder','title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-order-cell" name="aosbookmarkfolder_order" ng-model="refItem.order">
+                                        </td>
+                                        <!--<td>{{refItem.aospackage}}</td>-->
+                                        <!--<td>{{refItem.aoslocale}}</td>-->
+                                        <td class="ref-actions">
+                                            <input type="checkbox" ng-model="refItem.isDelete" name="aosbookmarkfolder_isDelete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.aosbookmarkfolder[entity.aosbookmarkfolder.length]['title']" name="aosbookmarkfolder_tit" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'aospreset', 'aosbookmarkfolder', 'title', entity.aosbookmarkfolder.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'aospreset', 'aosbookmarkfolder','title', entity.aosbookmarkfolder.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!--<input type="text" class="form-control inline-ref-order-cell" ng-model="entity.aosbookmarkfolder[entity.aosbookmarkfolder.length]['order']">-->
+                                        </td>
+                                        <!--<td></td>-->
+                                        <!--<td></td>-->
+                                        <td class="ref-actions">
+                                            <!--<input type="checkbox">-->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+            <!--<button class="btn btn-default right" ng-click="saveAndContinueEdit()">保存并继续编辑</button>-->
+            <button class="btn btn-default right" dp-form-submit="saveAsNew" ng-if="isEditState && !isPopup()" has-permission="add">保存为新的</button>
+        </div>
+    </form>
+</div>

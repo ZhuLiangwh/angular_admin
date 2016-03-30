@@ -1,0 +1,86 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="provision_form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">控制台标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">url: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="url" class="form-control" ng-model="entity.url" required="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>URL参数：</h5>
+                </div>
+                <div collapse="isCollapse2">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-iurlparam">
+                                    <thead>
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>Order</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.iurlparam">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="iurlparamTitle" ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'ipushservice', 'iurlparam', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'ipushservice', 'iurlparam', 'title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'ipushservice', 'iurlparam', 'title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-order-cell" name="iurlparamOrder" ng-model="refItem.order" readonly>
+                                        </td>
+                                        <td class="ref-actions">
+                                            <input type="checkbox" ng-model="refItem.isDelete" name="iurlparamDelete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.iurlparam[entity.iurlparam.length]['title']" name="iurlparamTit" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'ipushservice', 'iurlparam', 'title', entity.iurlparam.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'ipushservice', 'iurlparam', 'title', entity.iurlparam.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td class="ref-actions">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+            <button class="btn btn-default right" dp-form-submit="saveAsNew" ng-if="isEditState && !isPopup()" has-permission="add">保存为新的</button>
+        </div>
+    </form>
+</div>

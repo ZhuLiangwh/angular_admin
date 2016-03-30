@@ -1,0 +1,97 @@
+<div class="form-wrap">
+    <div class="form-content">
+        <form class="edit-form" novalidate dp-form-validator=""  name="pushservice_form" dp-after-validator="afterVali">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">内核开关: </label>
+                            <div class="col-sm-5">
+                                <select name="method" ng-model="entity.switch" ng-options="o.value as o.name for o in action_type"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">推送规则：</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="rule_title" class="form-control" ng-model="entity.aosruledata.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosruledata" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,entity.aosruledata.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosruledata" ng-click="removeFiled('aosruledata')"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>目标状态：</h5>
+                </div>
+                <div collapse="isCollapse2">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-enginestatus">
+                                    <thead>
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>Order</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.enginestatus">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="enginestatusTitle" ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'pushservice', 'enginestatus', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'pushservice', 'enginestatus', 'title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'pushservice', 'enginestatus', 'title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-order-cell" name="enginestatusOrder" ng-model="refItem.order" readonly>
+                                        </td>
+                                        <td class="ref-actions">
+                                            <input type="checkbox" ng-model="refItem.isDelete" name="enginestatusDelete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.enginestatus[entity.enginestatus.length]['title']" name="enginestatusTit" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'pushservice', 'enginestatus', 'title', entity.enginestatus.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'pushservice', 'enginestatus', 'title', entity.enginestatus.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!--<input type="text" class="form-control inline-ref-order-cell" ng-model="entity.bookmarkfolder[entity.bookmarkfolder.length]['order']">-->
+                                        </td>
+                                        <td class="ref-actions">
+                                            <!--<input type="checkbox">-->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-btn-wrap">
+                <!--<button class="btn btn-success right" ng-click="save()">保存</button>-->
+                <button type="submit" class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+                <!--<button type="submit" class="btn btn-default right" dp-form-submit="saveAndContinueEdit">保存并继续编辑</button>-->
+                <button type="submit" class="btn btn-default right" ng-if="isEditState && !isPopup()" dp-form-submit="saveAsNew" has-permission="add">保存为新的</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

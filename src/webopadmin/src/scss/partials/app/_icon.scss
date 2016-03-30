@@ -1,0 +1,57 @@
+.select-file-wrap{
+  position: relative;
+  .input-file{
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    opacity: 0;
+  }
+}
+.glyphicon-minus-sign{
+  color: red;
+}
+.glyphicon-ok-circle{
+  color: green;
+}
+.icon-page{
+  .list-datepicker .date-picker-select{
+    width: 160px;
+  }
+  .search-wrap {
+    width: 150px;
+    margin-right: 10px;
+  }
+  .filter-wrap select{
+    margin-right: 10px;
+  }
+  .widget-content label{
+    line-height: 36px;
+    input{
+      height: 29px;
+    }
+  }
+}
+.icon-image{
+  max-height: 100px;
+  max-width: 100px;
+
+}
+
+.icon-imglist li{
+  display: inline-block;
+  margin: 0 10px;
+}
+.icon-edit-page{
+  .widget-content label{
+    line-height: 36px;
+    input{
+      height: 27px;
+    }
+  }
+}
+.icon-preview-text{
+  line-height: 40px;
+}
+.split-line{
+  border-top: 1px solid #ccc;
+}

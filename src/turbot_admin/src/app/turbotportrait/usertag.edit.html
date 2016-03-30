@@ -1,0 +1,114 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="provision_form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户标签: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="tag" class="form-control" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.tag" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>日志来源</h5>
+                </div>
+                <div collapse="isCollapse2">
+                    <div class="widget-content">
+        
+                    <p class="form-group"><button class="btn btn-success" ng-click="addLogRow($index)">添加日志来源</button></p>
+
+                        <!-- <div class="form-group"> -->
+
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-speeddial">
+                                    <thead>
+                                        <tr>
+                                            <th>日志来源</th>
+                                            <th>权重<span style="font-size:12px"> (*注：所有的权重值之和为1)</span></th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in entity.userlogs">
+                                            <td>
+                                              <select name="key{{$index}}" class="form-control inline-ref-input-cell" ng-model="item.key" ng-options="item.number as item.value for item in displayInfo.key"></select>
+                                            </td>
+                                            <td>
+                                              <input type="number" class="form-control inline-ref-order-cell" name="score{{$index}}" dp-dynamic-field-name ng-model="item.score">
+                                            </td>
+                                            <td class="ref-actions">
+                                                <input type="button" class="btn btn-danger" ng-click="delLogRow(item)" value="删除"/>
+                                            </td>
+                                        
+                                        </tr>
+                                    
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse3 = !isCollapse3">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>关键词</h5>
+                </div>
+                <div collapse="isCollapse3">
+                    <div class="widget-content">
+        
+                    <p class="form-group"><button class="btn btn-success" ng-click="addRow($index)">添加关键词</button></p>
+
+                        <!-- <div class="form-group"> -->
+
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-speeddial">
+                                    <thead>
+                                        <tr>
+                                            <th>关键词</th>
+                                            <th>权重</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in entity.keywords">
+                                            <td>
+                                              <input type="text" class="form-control inline-ref-input-cell" name="key{{$index}}" dp-dynamic-field-name ng-model="item.key" >
+                                            </td>
+                                            <td>
+                                              <input type="number" class="form-control inline-ref-order-cell" name="score{{$index}}" dp-dynamic-field-name ng-model="item.score">
+                                            </td>
+                                            <td class="ref-actions">
+                                                <input type="button" class="btn btn-danger" ng-click="delRow(item)" value="删除"/>
+                                            </td>
+                                        
+                                        </tr>
+                                    
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+            <!-- <button class="btn btn-default right" ng-click="saveAndContinueEdit()">保存并继续编辑</button> -->
+            <button class="btn btn-default right" dp-form-submit="saveAsNew" ng-if="isEditState && !isPopup()" has-permission="add">保存为新的</button>
+        </div>
+    </form>
+</div>

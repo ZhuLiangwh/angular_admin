@@ -1,0 +1,84 @@
+<div class="form-wrap">
+    <div class="form-content">
+        <form class="edit-form" novalidate dp-form-validator="" name="ipushservice_form" dp-after-validator="afterVali">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">客户端名称: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="name" ng-model="entity.name" required=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">内容: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="content" ng-model="entity.content" required=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">地址: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="url" ng-model="entity.url"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">推送规则：</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="rule_title" class="form-control" ng-model="entity.aosruledata.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosruledata" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,entity.aosruledata.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosruledata" ng-click="removeFiled('aosruledata')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">权重: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="weight" ng-model="entity.weight" required=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">开始时间: </label>
+                            <div class="col-sm-2">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.start.dt" is-open="datePicker.start.opened" show-button-bar="false" ng-required="true" name="datePicker.start.dt" max-date="datePicker.end.dt"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openData($event, datePicker.start)" ng-disabled="datePicker.start.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                            <span class="control-label">日期格式：2015-12-03    11:23:42（24小时制）</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">结束时间: </label>
+                            <div class="col-sm-2">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.end.dt" is-open="datePicker.end.opened" show-button-bar="false" ng-required="true" name="datePicker.end.dt" min-date="datePicker.start.dt"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openData($event, datePicker.end)" ng-disabled="datePicker.end.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                            <span class="control-label">日期格式：2015-12-03    11:23:42（24小时制）</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-btn-wrap">
+                <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+                <!-- <button class="btn btn-default right" ng-click="saveAndContinueEdit()">保存并继续编辑</button>-->
+                <button class="btn btn-default right" dp-form-submit="saveAsNew" ng-if="isEditState && !isPopup()" has-permission="add">保存为新的</button>
+            </div>
+    </form>
+    </div>
+</div>
+</div>

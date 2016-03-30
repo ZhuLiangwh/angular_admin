@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <a class="dialog-cancel" ng-click="cancel()">
+        <span class="glyphicon glyphicon-remove"></span>
+    </a>
+    <h3 class="modal-title">Select Role</h3>
+</div>
+<div class="modal-body user-dialog" cc-loading-layer="dialogInfo.status != 'loading'">
+    <div class="roles-warp">
+        <label class="role-item" ng-class="role.selected ? 'role-item-active' :''" ng-repeat="role in roles" ><input type="checkbox" ng-model="role.selected"/>{{role.display_value}}</label>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="btn" class="btn btn-default" ng-click="cancel()">Cancel</button>
+    <button ng-if="!isCreating" class="btn btn-success" ng-click="confirmSelect()">Confirm</button>
+</div>

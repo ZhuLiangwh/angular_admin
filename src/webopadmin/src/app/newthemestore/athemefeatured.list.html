@@ -1,0 +1,77 @@
+<div class="list-wrap">
+    <div class="list-top clearfix">
+        <button ng-show="!isPopup()" class="btn btn-success right" ng-click="addAthemefeatured()" has-permission="add">添加专题</button>
+        <div class="list-datepicker left">
+            <div class="date-selected">
+            <span class="input-group date-picker-select">
+                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.start.dt" max-date="datePicker.end.dt" is-open="datePicker.start.opened" show-button-bar="false"  ng-required="true" readonly/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event, datePicker.start)" ng-disabled="datePicker.end.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </span>
+                <label class="date-picker-text">—</label>
+            <span class="input-group date-picker-select end-date">
+                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.end.dt" min-date="datePicker.start.dt" max-date="datePicker.end.max" is-open="datePicker.end.opened" show-button-bar="false" ng-required="true" readonly/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event, datePicker.end)" ng-disabled="datePicker.start.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </span>
+            </div>
+        </div>
+        <div class="search-wrap left">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" type="text" ng-model="search.string">
+                    <span class="glyphicon glyphicon-search form-control-feedback" ng-disabled="isLoading" ng-click="goSearch()"></span>
+                </div>
+            </div>
+        </div>
+        <div class="filter-wrap left" style="margin-left: 10px">
+            <dp-multi-dropdown selected-model="selectOptions" on-selected="filter(node, isInit)"></dp-multi-dropdown>
+        </div>
+    </div>
+    <div class="list-content" cc-loading-layer="!athemefeaturedTableParams.settings().$loading">
+        <div ng-show="!athemefeaturedTableParams.settings().$loading && items && !items.length" class="no-data">The list is empty, nothing to do！ </div>
+        <table ng-table="athemefeaturedTableParams" class="table table-bordered trans-table" template-pagination="app/layouts/pagination.html">
+            <thead>
+            <tr>
+                <th width="3%"> <input type="checkbox" all-select-dire2 has-selected="vm.listChecked" all-select-resource="items"/> </th>
+                <th width="5%">ID<dp-sort-field sort-by="id" sort="desc" params="apiParams"></dp-sort-field></th>
+                <th width="10%">专题名称</th>
+                <th width="15%">分类图标</th>
+                <th width="10%">是否推荐</th>
+                <th width="15%">更新时间</th>
+                <th width="15%">上线时间</th>
+                <th width="10%">测试环境</th>
+                <th width="10%">正式环境</th>
+                <th width="5%">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in items" ng-click="choice(item)">
+                <td><input type="checkbox" ng-model="item.checked"/></td>
+                <td class="text-align-c">{{item.id}}</td>
+                <td class="text-align-c">{{item.title}}<i ng-if="item.release" ng-show="item.release==1" tooltip="未发布到测试环境" class="fa fa-exclamation-circle" ng-class="{'fa-exclamation-relase':item.release==2}"></i><i ng-show="item.release==2" ng-if="item.release" tooltip="未发布到正式环境" class="fa fa-exclamation-circle" ng-class="{'fa-exclamation-relase':item.release==2}"></i></td>
+                <td class="text-align-c"><img class="icon-image" ng-src="{{item.thumbnail1}}" alt=""/></td>
+                <td class="text-align-c"><span ng-show="item.banner===true">推荐</span><span ng-show="item.banner===false">不推荐</span></td>
+                <td class="text-align-c">{{item.last_modified}}</td>
+                <td class="text-align-c">{{item.last_release_ec2}}</td>
+                <td class="text-align-c"><i class="fa" ng-class="item.is_upload_local ? 'fa-check-circle-o' : 'fa-minus-circle'"></i></td>
+                <td class="text-align-c"><i class="fa" ng-class="item.is_upload_ec2 ? 'fa-check-circle-o' : 'fa-minus-circle'"></i></td>
+                <td data-title="'Action'" class="list-table-actions-col">
+                    <a href="" class="btn btn-default left" ng-click="ViewDetail(item)">ViewDetail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="table-footer-btn-wrap left">
+            <button class="btn btn-default" ng-click="deleteFromConsole()" has-permission="delete">从本地删除</button>
+            <button class="btn btn-default" ng-click="uploadToLocale()" has-feature="newthemestore-athemefeatured-upload_local">上传到测试环境</button>
+            <button class="btn btn-default" ng-click="deleteFromLocale()" has-feature="newthemestore-athemefeatured-del_local">从测试环境删除</button>
+            <button class="btn btn-default" ng-click="uploadToOverseas()" has-feature="newthemestore-athemefeatured-upload_ec2">上传到正式环境</button>
+            <button class="btn btn-default" ng-click="deleteFromOverseas()" has-feature="newthemestore-athemefeatured-del_ec2">从正式环境删除</button>
+            <span class="list-total-checked">{{vm.listTotal}}中{{vm.listChecked.length}}被选</span>
+        </div>
+        <span class="list-total">共{{vm.listTotal}}条数据</span>
+    </div>
+</div>

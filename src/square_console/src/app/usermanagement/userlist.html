@@ -1,0 +1,43 @@
+<div class="list-wrap">
+    <div class="filter-wrap list-top">
+        <!--
+        <button class="btn btn-success add-trans-btn" has-feature="create-user" ng-click="createUser()">Create User</button>
+        -->
+        <button class="btn btn-success add-trans-btn" ng-click="createUser()" has-permission="add">Create User</button>
+        <form class="form-inline" role="form">
+            <!--<label for="" class="label-txt">Role:</label>-->
+            <!--<select ng-options="role.display_value for role in filterRoles" ng-model="filter.role" ng-change="changeFilterRole()"></select>-->
+            <div class="form-group">
+                <div class="input-group has-feedback">
+                    <input class="form-control" type="text" ng-model="filterParmas.user_name" placeholder="user name">
+                    <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-search': !filterstring,'glyphicon-remove': filterstring}" ng-click="filterstring = ''"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="list-content" cc-loading-layer="!transTableParams.settings().$loading">
+        <div ng-show="!transTableParams.settings().$loading && items && !items.length" class="no-data">The list is empty, nothing to do！</div>
+        <table ng-table="transTableParams" class="table table-bordered  table-role" template-pagination="app/layouts/pagination.html" >
+            <tr ng-repeat="item in items">
+                <td data-title="'ID'" width="3%">{{item.id}}</td>
+                <td data-title="'User Name'" width="17%">{{item.user_name}}</td>
+                <td data-title="'Role'">{{item.role}}</td>
+                <td data-title="'Last Login'"  width="13%">{{item.last_login}}</td>
+                <td data-title="'Total Login'" width="7%">{{item.total_login}}</td>
+                <td data-title="'Mark'"  width="10%">{{item.mark}}</td>
+                <td data-title="'Permissions'"  width="8%"><a href="" class="btn btn-default" ng-click="viewDetail(item)">View Details</a></td>
+                <td data-title="'Actions'" width="8%" class="trans-action-col actions-wrap" style="padding-left:10px;">
+                    <a class="tip" href="" tooltip="Edit" ng-click="edit(item)" has-permission="edit">
+                        <i class="action-icon fa fa-pencil"></i>
+                    </a>
+                    <a class="tip" href="" tooltip="{{ item.is_active ? 'Disable' : 'Enable'}}" ng-click="disable(item)" has-feature="auth-active-user">
+                        <i ng-class="['action-icon fa', item.is_active ? 'fa-check-circle-o' : 'fa-ban']"></i>
+                    </a>
+                    <a class="tip" href="" tooltip="Delete" ng-click="del(item,$index)" has-permission="delete">
+                        <i class="action-icon fa fa-times"></i>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

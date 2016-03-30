@@ -1,0 +1,58 @@
+<div class="form-wrap">
+    <div class="form-content">
+        <form class="edit-form" novalidate dp-form-validator=""  name="revenueservice_form" dp-after-validator="afterVali">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">黑名单/白名单: </label>
+                            <div class="col-sm-6">
+                                <select name="tag" ng-model='entity.tag' ng-options='o.name as o.value for o in tags'></select>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">url文件: </label>
+                            <div class="col-sm-6">
+                                <div class="FileUpload">
+                                    <input type="file" accept='text/plain' class="input-file" name="urlfile_file" file-model="entity.urlfile_file" on-changed="getFileInfo(node)">
+                                    <button class="btn btn-default">更改文件</button><span>{{entity.urlfile_file.name}}</span>
+                                    <span ng-show='!entity.urlfile_file.name'> (目前只支持英文url)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">插件包名: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="widgetpn" ng-model="entity.widgetpn" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">插件版本: </label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" name="widgetvc" ng-model="entity.widgetvc" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">url版本: </label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" name="urlvc" ng-model="entity.urlvc" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-btn-wrap">
+                <button type="submit" class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</div>

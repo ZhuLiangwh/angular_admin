@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <a class="dialog-cancel" ng-click="cancel()">
+        <span class="glyphicon glyphicon-remove"></span>
+    </a>
+    <h3 class="modal-title">{{title}}</h3>
+</div>
+<form name="remarkForm" class="remark-form" novalidate dp-form-validator="">
+    <div class="modal-body">
+        <textarea class="form-control" rows="3" name="remark" ng-model="entity.mark" option="{tipPos:'bottom'}" required="" placeholder="请填写备注"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="btn" class="btn btn-default" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-success" dp-form-submit="confirm">Confirm</button>
+    </div>
+</form>

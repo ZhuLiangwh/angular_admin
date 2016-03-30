@@ -1,0 +1,93 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="provision_form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">控制台标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">客户端名称: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.name" name="name" placeholder="" required="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>speeddial 项</h5>
+                </div>
+                <div collapse="isCollapse2">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-speeddial">
+                                    <thead>
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>Order</th>
+                                        <!--<th>项目名称</th>-->
+                                        <!--<th>Locales</th>-->
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.speeddial">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="speeddialTitle" ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'pushservice', 'speeddial', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'pushservice', 'speeddial', 'title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'pushservice', 'speeddial', 'title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-order-cell" name="speeddialOrder" ng-model="refItem.order">
+                                        </td>
+                                        <!--<td>{{refItem.aospackage}}</td>-->
+                                        <!--<td>{{refItem.aoslocale}}</td>-->
+                                        <td class="ref-actions">
+                                            <input type="checkbox" ng-model="refItem.isDelete" name="speeddialDelete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="speeddialTit" ng-model="entity.speeddial[entity.speeddial.length]['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'pushservice', 'speeddial', 'title', entity.speeddial.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'pushservice', 'speeddial', 'title', entity.speeddial.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!--<input type="text" class="form-control inline-ref-order-cell" ng-model="entity.speeddialfolder[entity.speeddialfolder.length]['order']">-->
+                                        </td>
+                                        <!--<td></td>-->
+                                        <!--<td></td>-->
+                                        <td class="ref-actions"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+            <!-- <button class="btn btn-default right" ng-click="saveAndContinueEdit()">保存并继续编辑</button> -->
+            <button class="btn btn-default right" dp-form-submit="saveAsNew" ng-if="isEditState && !isPopup()" has-permission="add">保存为新的</button>
+        </div>
+    </form>
+</div>

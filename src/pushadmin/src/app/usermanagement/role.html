@@ -1,0 +1,39 @@
+<div class="list-wrap">
+    <div class="filter-wrap list-top">
+        <form class="form-inline" role="form" novalidate name="form_addrole" ng-submit="addRole(newrolename)">
+            <div class="form-group">
+                <label for="rolename">Roles Name:</label>
+                <input type="text" id="rolename" ng-model="newrolename" required class="form-control" placeholder="role name"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" ng-disabled="form_addrole.$invalid" class="btn btn-default btn-gray">Add Role</button>
+            </div>
+        </form>
+    </div>
+    <div class="list-content" cc-loading-layer="!transTableParams.settings().$loading">
+        <div ng-show="!roleParams.settings().$loading && items && !items.length" class="no-data">The list is empty, nothing to do！</div>
+        <table ng-table="roleParams" class="table table-bordered table-role" template-pagination="app/layouts/pagination.html" >
+            <tr ng-repeat="item in items">
+                <td data-title="'ID'" width="5%">{{item.id}}</td>
+                <!--
+                 <td data-title="'User Name'" ng-model="item.role_name" contenteditable="{{item.isEdit}}" ng-class="[item.isEdit ? 'editTd':'']" ng-click="item.isEdit = true">{{item.role_name}}</td>
+                 -->
+                <td data-title="'Role Name'"><i class="dirty dirty-pos" ng-show="item.notSave"></i><input ng-model="item.role_name" ng-class="['form-control role-name',item.isEdit ? 'editTd':'']" ng-blur="blur(item)" ng-focus="focus(item)"/></td>
+                <td data-title="'Users'" width="10%"><a href="" class="btn btn-default" ng-click="viewUser(item)">View Details</a></td>
+                <td data-title="'Permissions'"  width="10%"><a href="" class="btn btn-default" ng-click="viewPermissions(item)">View Details</a></td>
+                <td data-title="'Actions'" width="7%" class="trans-action-col  actions-wrap">
+                    <a class="tip" href="" tooltip="Edit" ng-show="!(item.isEdit||item.notSave)" ng-click="edit(item)" has-permission="edit">
+                        <i class="action-icon fa fa-pencil"></i>
+                    </a>
+                    <a class="tip" href="" tooltip="Save" ng-show="item.isEdit||item.notSave"  ng-mousedown="save(item)">
+                        <i class="action-icon fa fa-check"></i>
+                    </a>
+                    <!-- <a class="tip" href="" tooltip="Delete" ng-show="item.role_name!='Admin'" ng-click="del(item,$index)"> -->
+                    <a class="tip" href="" tooltip="Delete" ng-click="del(item,$index)" has-permission="delete">
+                        <i class="action-icon fa fa-trash-o"></i>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

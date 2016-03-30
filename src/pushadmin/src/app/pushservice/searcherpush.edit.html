@@ -1,0 +1,149 @@
+<div class="form-wrap">
+    <div class="form-content">
+        <form class="edit-form" novalidate dp-form-validator="" name="pushservice_form" dp-after-validator="afterVali">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">操作类型: </label>
+                            <div class="col-sm-5">
+                                <select name="method" ng-model="entity.method" ng-options="o.value as o.name for o in action_type"></select>
+                            </div>
+                        </div>
+                        <!--add类型-->
+                        <div ng-if="entity.method === 'add'">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">搜索引擎标识：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="search_id" ng-model="add.searcher_identify" class="form-control">
+                                </div>
+                                <span class="col-sm-4 control-tip">请输入搜索引擎的unique name</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">修改为：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="search_title" class="form-control" ng-model="add.searcher.title" readonly option="{tipPos:'left'}" required="">
+                                </div>
+                                <div class="col-sm-4 clear_col_margin">
+                                    <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','pushservice', 'searcher', 'title', 0 ,'', true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-pencil" ng-if="add.searcher" ng-click="popUp('edit','pushservice', 'searcher', 'title', 0 ,add.searcher.id, true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','pushservice', 'searcher', 'title', 0 ,'', true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-remove" ng-if="add.searcher" ng-click="removeFiled('searcher')"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">推送规则：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="rule_title" class="form-control" ng-model="add.aosruledata.title" readonly>
+                                </div>
+                                <div class="col-sm-4 clear_col_margin">
+                                    <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-pencil" ng-if="add.aosruledata" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,add.aosruledata.id, true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-remove" ng-if="add.aosruledata" ng-click="removeFiled('aosruledata')"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="is_force" ng-model="add.is_force">是否强制
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="is_default" ng-model="add.is_default">是否设为默认
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--modify类型-->
+                        <div ng-if="entity.method === 'modify'">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">搜索引擎标识：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="search_id" ng-model="modify.searcher_identify" class="form-control">
+                                </div>
+                                <span class="col-sm-4 control-tip">请输入搜索引擎的unique name</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">修改为：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="content" class="form-control" ng-model="modify.searcher_modify.title" readonly option="{tipPos:'left'}" required="">
+                                </div>
+                                <div class="col-sm-4 clear_col_margin">
+                                    <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp_details('list','pushservice', modify.push_type, 'title', 0 ,'', true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-pencil" ng-if="modify.searcher_modify" ng-click="popUp_details('edit','pushservice', modify.push_type, 'title', 0 ,modify.searcher_modify.id, true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp_details('add','pushservice', modify.push_type, 'title', 0 ,'', true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-remove" ng-if="modify.searcher_modify" ng-click="removeFiled('searcher_modify')"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">推送规则：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="rule_title" class="form-control" ng-model="modify.aosruledata.title" readonly>
+                                </div>
+                                <div class="col-sm-4 clear_col_margin">
+                                    <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-pencil" ng-if="modify.aosruledata" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,modify.aosruledata.id, true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-remove" ng-if="modify.aosruledata" ng-click="removeFiled('aosruledata')"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="is_force" ng-model="modify.is_force">是否强制
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="is_default" ng-model="modify.is_default">是否设为默认
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--delete类型-->
+                        <div ng-if="entity.method === 'delete'">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">搜索引擎标识：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="search_id" ng-model="delete.searcher_identify" class="form-control">
+                                </div>
+                                <span class="col-sm-4 control-tip">请输入搜索引擎的unique name</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">推送规则：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="rule_title" class="form-control" ng-model="delete.aosruledata.title" readonly>
+                                </div>
+                                <div class="col-sm-4 clear_col_margin">
+                                    <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-pencil" ng-if="delete.aosruledata" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,delete.aosruledata.id, true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                    <span class="ref-icon glyphicon glyphicon-remove" ng-if="delete.aosruledata" ng-click="removeFiled('aosruledata')"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="is_force" ng-model="delete.is_force">是否强制
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="is_default" ng-model="delete.is_default">是否设为默认
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-btn-wrap">
+                <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+                <!-- <button class="btn btn-default right" ng-click="saveAndContinueEdit()">保存并继续编辑</button>-->
+                <button class="btn btn-default right" dp-form-submit="saveAsNew" ng-if="isEditState && !isPopup()" has-permission="add">保存为新的</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

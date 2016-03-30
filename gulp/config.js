@@ -1,0 +1,80 @@
+module.exports = {
+    project:[
+        {
+            "alias":"login",
+            "src":"./src/",
+            "build":"./build/"
+        },
+        {
+            "alias":"sc",
+            "src":"./src/square_console/src/",
+            "build":"./build/square_console/build/"
+        },
+        {
+            "alias":"ps",
+            "src":"./src/provision_services/src/",
+            "build":"./build/provision_services/build/"
+        },
+        {
+            "alias":"auth",
+            "src":"./src/auth/src/",
+            "build":"./build/auth/build/"
+        },
+        {
+            "alias":"pushadmin",
+            "src":"./src/pushadmin/src/",
+            "build":"./build/pushadmin/build/"
+        },
+        {
+            "alias":"home",
+            "src":"./src/homeadmin/src/",
+            "build":"./build/homeadmin/build/"
+        },
+        {
+            "alias":"webop",
+            "src":"./src/webopadmin/src/",
+            "build":"./build/webopadmin/build/"
+        },
+        {
+            "alias":"iosadmin",
+            "src":"./src/ios_console/src/",
+            "build":"./build/ios_console/build/"
+        },
+        {
+            "alias":"turbotadmin",
+            "src":"./src/turbot_admin/src/",
+            "build":"./build/turbot_admin/build/"
+        }
+    ],
+    vendorJs:[
+        "vendor/headjs/dist/1.0.0/head.load.min.js",
+        "vendor/jquery/dist/jquery.min.js",
+        "vendor/angular/angular.min.js",
+        "vendor/angular-sanitize/angular-sanitize.min.js",
+        "vendor/angular-ui-router/release/angular-ui-router.min.js",
+        "vendor/angular-bootstrap/ui-bootstrap-tpls.min.js",
+        "vendor/ng-table/ng-table.min.js",
+        "vendor/angular-dolphin/angular-dolphin.js",
+        "vendor/toastr/toastr.min.js",
+        "vendor/requirejs/require.js",
+        "vendor/underscore/underscore.js",
+        "vendor/highcharts-release/highcharts.js",
+        "vendor/requirejs-domready/domReady.js",
+        "vendor/requirejs-text/text.js"
+    ],
+    vendorCss:[
+        "vendor/toastr/toastr.min.css",
+        "vendor/bootstrap/dist/css/bootstrap.min.css",
+        'vendor/bootstrap/dist/fonts/**/*.*',
+        "vendor/font-awesome/css/font-awesome.min.css",
+        "vendor/font-awesome/fonts/**/*.*"
+    ],
+    getVendors:function(pro){
+        var js = this.vendorJs.slice(0),
+            css = this.vendorCss.slice(0),
+            dir = pro.src,
+            re = js.concat(css);
+
+        return re.map(function(item){ return dir + item ;})
+    }
+};

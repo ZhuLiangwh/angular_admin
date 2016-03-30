@@ -1,0 +1,97 @@
+<div class="form-wrap">
+    <div class="form-content">
+        <form class="edit-form" novalidate dp-form-validator=""  name="revenueservice_form" dp-after-validator="afterVali">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" ng-model="entity.title"  dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">连续使用频率: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="continuously_days" ng-model="entity.continuously_days" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">累计使用频率: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="times_in_continuously_days" ng-model="entity.times_in_continuously_days" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">启动次数: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="cumulative_startup_times" ng-model="entity.cumulative_startup_times" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">5star_rating_url: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="5star_rating_url" ng-model="entity.5star_rating_url" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">下次弹框间隔启动次数: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="nextshow_start_interval" ng-model="entity.nextshow_start_interval" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">推送规则：</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="rule_title" class="form-control" ng-model="entity.aosruledata.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosruledata" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,entity.aosruledata.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosruledata" ng-click="removeFiled('aosruledata')"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>权重</h5>
+                </div>
+                <div collapse="isCollapse3">
+
+                    <div class="widget-content">
+                        <p class="form-group"><button class="btn btn-success" ng-click="addRow($index)">添加权重</button> (*注：所填权重加起来的值等于1000)</p>
+                        <div class="inline-ref-table">
+                            <table class="table table-bordered ref-table ref-urloption" >
+                                <thead>
+                                    <tr>
+                                        <th>权重</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in entity.type_proportion_list">
+                                        <td><input type="text" class="form-control inline-ref-input-cell" name="weight{{$index}}" dp-dynamic-field-name ng-model="item.weight"/></td>
+                                        <td class="ref-actions"><button class="btn btn-danger" ng-click="delRow($index)">删除</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-btn-wrap">
+                <button type="submit" class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+            </div>
+        </form>
+    </div>
+</div>
+

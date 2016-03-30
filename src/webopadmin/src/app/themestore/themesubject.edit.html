@@ -1,0 +1,146 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="theme_form" dp-after-validator="afterVali">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">专题记录标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="entity.banner"/> banner
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">专题显示标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.name" name="name" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">专题描述: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.describe" name="describe" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">专题序号: </label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" ng-model="entity.subject_order" name="subject_order" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">专题图标: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="icon_title" ng-model="entity.icon.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.icon.title && entity.icon.length!=0" ng-click="popUp('edit','staticresource', 'icon', 'title', 0 ,entity.icon.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.icon.title && entity.icon.length!=0" ng-click="removeFiled('icon')"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">推送规则：</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="rule_title" class="form-control" ng-model="entity.aosruledata.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosruledata.title && entity.aosruledata.length!=0" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,entity.aosruledata.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosruledata.title && entity.aosruledata.length!=0" ng-click="removeFiled('aosruledata')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Theme Tags: </label>
+                            <div class="col-sm-10" style="padding-top: 5px">
+                                <label class="radio-inline" ng-repeat="value in values">
+                                    <input type="radio" name="myTestRadio" ng-model="entity.theme_tag" ng-value="value.val"
+                                           ng-checked="entity.theme_tag == value.val"/>{{value.name}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>Theme 专题</h5>
+                </div>
+                <div collapse="isCollapse2">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-theme">
+                                    <thead>
+                                    <tr>
+                                        <th>Theme</th>
+                                        <th>Order</th>
+                                        <!--<th>项目名称</th>-->
+                                        <!--<th>Locales</th>-->
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.theme">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="themeTitle" ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'themestore', 'theme', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'themestore', 'theme', 'title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'themestore', 'theme', 'title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-order-cell" name="themeOrder" ng-model="refItem.order">
+                                        </td>
+                                        <!--<td>{{refItem.aospackage}}</td>-->
+                                        <!--<td>{{refItem.aoslocale}}</td>-->
+                                        <td class="ref-actions">
+                                            <input type="checkbox" ng-model="refItem.isDelete" name="themeDelete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="themeTit" ng-model="entity.theme[entity.theme.length]['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'themestore', 'theme', 'title', entity.theme.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'themestore', 'theme', 'title', entity.theme.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!--<input type="text" class="form-control inline-ref-order-cell" ng-model="entity.themefolder[entity.themefolder.length]['order']">-->
+                                        </td>
+                                        <!--<td></td>-->
+                                        <!--<td></td>-->
+                                        <td class="ref-actions"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+            <!-- <button class="btn btn-default right" ng-click="saveAndContinueEdit()">保存并继续编辑</button> -->
+            <!--<button class="btn btn-default right" dp-form-submit="saveAsNew" ng-if="isEditState && !isPopup()" has-permission="add">保存为新的</button>-->
+        </div>
+    </form>
+</div>

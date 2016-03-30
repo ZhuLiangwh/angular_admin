@@ -1,0 +1,49 @@
+<div class="form-wrap icon-edit-page">
+  <div class="form-content">
+    <form class="edit-form">
+      
+        <div class="widget-box">
+          <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+            <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+            <h5>文件上传</h5>
+          </div>
+          <div collapse="isCollapse1">
+            <div class="widget-content">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">控制台标题: </label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="entity.title">
+                  </div>
+                </div>
+            
+                <div class="form-group">
+                  
+                  <label class="col-sm-2 control-label">上传文件: </label>
+                  <div class="col-sm-10">
+
+                    <div class="FileUpload">
+                      <input type="file" class="input-file" file-model="entity.apk" on-changed="getFileInfo(node)">
+                      <button class="btn btn-default">更改文件</button>
+                      <span>{{entity.apk.name}}</span>
+                      <span ng-if="!entity.apk.name && entity.apk">{{entity.apk}}</span>
+                      <span class="control-tip" style="padding-left:15px;">文件最大不能超过50M</span>
+                    </div>
+                  </div>
+
+                </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">运营自定义文件名: </label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" ng-model="entity.filename">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    </form>
+  </div>
+  <div class="form-btn-wrap">
+    <button class="btn btn-success right" ng-click="save()" has-permission="edit||add">保存</button>
+  </div>
+</div>

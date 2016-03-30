@@ -1,0 +1,89 @@
+<div class="list-wrap icon-page">
+    <div class="list-top clearfix">
+        <button ng-show="!isPopup()" class="btn btn-success right" ng-click="addIcon()" has-permission="add">添加Icon</button>
+        <div class="search-wrap left">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" type="text" ng-model="search.string">
+                    <span class="glyphicon glyphicon-search form-control-feedback" ng-disabled="isLoading" ng-click="goSearch()"></span>
+                </div>
+            </div>
+        </div>
+        <div class="list-datepicker left">
+            <div class="date-selected">
+                <span class="input-group date-picker-select">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.start.dt"
+                           max-date="datePicker.end.dt" is-open="datePicker.start.opened" show-button-bar="false" readonly
+                           ng-required="true"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event, datePicker.start)" ng-disabled="datePicker.end.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </span>
+                <label class="date-picker-text">—</label>
+                <span class="input-group date-picker-select end-date">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.end.dt"
+                           min-date="datePicker.start.dt" max-date="datePicker.end.max" is-open="datePicker.end.opened"
+                           show-button-bar="false" readonly ng-required="true"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event, datePicker.end)" ng-disabled="datePicker.start.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="list-content" cc-loading-layer="!iconTableParams.settings().$loading">
+        <div ng-show="!iconTableParams.settings().$loading && items && !items.length" class="no-data">The list is empty, nothing to do！ </div>
+        <table ng-table="iconTableParams" class="table table-bordered trans-table" template-pagination="app/layouts/pagination.html">
+            <thead>
+            <tr>
+                <th width="50"> <input type="checkbox" all-select-dire2 has-selected="vm.listChecked" all-select-resource="items"/> </th>
+                <th width="60">ID</th>
+                <th width="6%">平台</th>
+                <th width="150">图片名称</th>
+                <th>图片资源</th>
+                <th width="60">宽</th>
+                <th width="60">高</th>
+                <th>测试环境地址</th>
+                <th>正式环境地址</th>
+                <th width="90">测试环境</th>
+                <th width="90">正式环境</th>
+                <th width="80">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in items" ng-click="choice(item)">
+                <td width="50"><input type="checkbox" ng-model="item.checked"/></td>
+                <td>{{item.id}}</td>
+                <td class="text-align-c"><span ng-show="item.platform===1">Android</span><span ng-show="item.platform===2" class="">IOS</span><span ng-show="item.platform===3" class="">PC</span></td>
+                <td>{{item.title}}</td>
+                <td class="center"><img class="icon-image" ng-src="{{item.icon}}" alt=""></td>
+                <td class="center">{{item.width}}</td>
+                <td class="center">{{item.height}}</td>
+                <td>{{item.local_url}}</td>
+                <td>{{item.ec2_url}}</td>
+                <td class="center">
+                    <span class="glyphicon" ng-class="item.is_upload_local ? 'glyphicon-ok-circle' : 'glyphicon-minus-sign'"></span>
+                </td>
+                <td class="center">
+                    <span class="glyphicon" ng-class="item.is_upload_ec2 ? 'glyphicon-ok-circle' : 'glyphicon-minus-sign'"></span>
+                </td>
+                <td data-title="'Actions'" class="list-table-actions-col center">
+                    <a href="" class="btn btn-default" ng-click="ViewDetail(item)">编辑</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="table-footer-btn-wrap left">
+            <button class="btn btn-default" ng-click="deleteFromConsole()" has-permission="delete">从本地删除</button>
+            <button class="btn btn-default" ng-click="uploadToLocale()" has-feature="staticresource-icon-upload_local">上传到测试环境</button>
+            <button class="btn btn-default" ng-click="deleteFromLocale()" has-feature="staticresource-icon-del_local">从测试环境删除</button>
+            <!-- <button class="btn btn-default" ng-click="uploadToInland()">上传到国内</button>
+            <button class="btn btn-default" ng-click="deleteFromInland()">从国内删除</button> -->
+            <button class="btn btn-default" ng-click="uploadToOverseas()" has-feature="staticresource-icon-upload_ec2">上传到正式环境</button>
+            <button class="btn btn-default" ng-click="deleteFromOverseas()" has-feature="staticresource-icon-del_ec2">从正式环境删除</button>
+            <!-- <button class="btn btn-default" ng-click="export()">导出</button> -->
+            <span class="list-total-checked">{{vm.listTotal}}中{{vm.listChecked.length}}被选</span>
+        </div>
+        <span class="list-total">共{{vm.listTotal}}条数据</span>
+    </div>
+</div>

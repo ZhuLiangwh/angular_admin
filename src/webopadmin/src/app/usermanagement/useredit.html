@@ -1,0 +1,33 @@
+<div class="user-warp">
+    <form class="form-horizontal" name="createTransForm" ng-submit="createUser()" novalidate>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Username</label>
+            <div class="col-sm-7">
+                <input type="email" placeholder="user name" class="form-control" ng-model="user.user_name" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Role</label>
+            <div class="col-sm-7">
+                <a href="" class="btn btn-gray width-full" role="button" ng-click="selectRole()">Select Role +</a>
+                <div class="roles-warp">
+                    <span  ng-repeat="role in selectedRoles" class="role-item"><i ng-click="deleteRole(role)">X</i>{{role.display_value}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Mark</label>
+            <div class="col-sm-7">
+                <input type="text" placeholder="mark" class="form-control" ng-model="user.mark">
+            </div>
+        </div>
+        <div class="form-footer">
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-7">
+                    <button class="btn btn-default btn-gray" ng-click="cancel()">Cancel</button>
+                    <button class="btn btn-success ng-scope" type="submit">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,143 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="pushservice_form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">控制台标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" ng-model="entity.title" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">客户端标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="name" class="form-control" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.name" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Download url: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="download_url" ng-model="entity.download_url" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Application name: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="application_name" ng-model="entity.application_name" required="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Description: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="description" ng-model="entity.description" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Long description: </label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" name="long_description" ng-model="entity.long_description" required=""></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Icon url: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control ng-pristine ng-valid" name="icon_url" ng-model="entity.icon.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.icon" ng-click="popUp('edit','staticresource', 'icon', 'title', 0 ,entity.icon.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.icon" ng-click="removeFiled('icon')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Addon bar icon url: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="addon_bar_icon_url" ng-model="entity.addon_bar_icon_url.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp_details('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.addon_bar_icon_url.title && entity.addon_bar_icon_url.length!=0" ng-click="popUp_details('edit','staticresource', 'icon', 'title', 0 ,entity.addon_bar_icon_url.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp_details('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.addon_bar_icon_url.title && entity.addon_bar_icon_url.length!=0" ng-click="removeFiled('addon_bar_icon_url')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">icon nightmode url: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="addon_bar_icon_nightmode_url" ng-model="entity.addon_bar_icon_nightmode_url.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp_details2('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.addon_bar_icon_nightmode_url.title && entity.addon_bar_icon_nightmode_url.length!=0" ng-click="popUp_details2('edit','staticresource', 'icon', 'title', 0 ,entity.addon_bar_icon_nightmode_url.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp_details2('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.addon_bar_icon_nightmode_url.title && entity.addon_bar_icon_nightmode_url.length!=0" ng-click="removeFiled('addon_bar_icon_nightmode_url')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Promotion banner url: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="promotion_banner_url" ng-model="entity.promotion_banner_url.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp_details3('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.promotion_banner_url.title && entity.promotion_banner_url.length!=0" ng-click="popUp_details3('edit','staticresource', 'icon', 'title', 0 ,entity.promotion_banner_url.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp_details3('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.promotion_banner_url.title && entity.promotion_banner_url.length!=0" ng-click="removeFiled('promotion_banner_url')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Package name：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="packagename" ng-model="entity.packagename" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">promotion dialog at launch：</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" name="show_at_launch" ng-model="entity.show_at_launch" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Order：</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" min="0" name="order" ng-model="entity.order" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="show_in_addon_bar" ng-model="entity.show_in_addon_bar"> Show in addon bar
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="is_text_selection_addon" ng-model="entity.is_text_selection_addon"> Is text selection addon
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="show_on_click" ng-model="entity.show_on_click"> show promotion dialog on click
+
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+        </div>
+    </form>
+</div>

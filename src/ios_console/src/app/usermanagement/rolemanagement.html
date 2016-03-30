@@ -1,0 +1,35 @@
+<div class="list-wrap">
+    <div class="filter-wrap list-top">
+        <button class="btn btn-success add-trans-btn" has-feature="create-task" ng-click="createUser()">Create User</button>
+        <form class="form-inline" role="form">
+            <cascade-dropdown selected-model="selectOptions" select-name="selectName" on-selected="filter(node, isInit)"></cascade-dropdown>
+            <div class="form-group">
+                <div class="input-group has-feedback">
+                    <input class="form-control" type="text" ng-model="filterstring" placeholder="user name">
+                    <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-search': !filterstring,'glyphicon-remove': filterstring}" ng-click="filterstring = ''"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="list-content" cc-loading-layer="!transTableParams.settings().$loading">
+        <div ng-show="!transTableParams.settings().$loading && items && !items.length" class="no-data">The list is empty, nothing to do！</div>
+        <table ng-table="transTableParams" class="table table-bordered trans-table" template-pagination="app/layouts/pagination.html" >
+            <tr ng-repeat="item in items">
+                <td data-title="'ID'" width="3%">{{item.id}}</td>
+                <td data-title="'User Name'">{{item.user_name}}</td>
+                <td data-title="'Department'" width="10%">{{item.department}}</td>
+                <td data-title="'Role'"  width="10%">{{item.role}}</td>
+                <td data-title="'Last Login'"  width="15%">{{item.last_login}}</td>
+                <td data-title="'Total Login'" width="10%">{{item.total_login}}</td>
+                <td data-title="'Mark'">{{item.mark}}</td>
+                <td data-title="'Permissions'"  width="10%"><a href="" class="btn btn-default" ng-click="viewDetail(item)">View Details</a></td>
+                <td data-title="'Actions'" width="6%" class="trans-action-col">
+                    <a class="tip tip-left" href="" tooltip="Edit" ng-click="edit(item)">
+                        <i class="action-icon fa fa-pencil"></i>
+                    </a>
+                    <span ng-class="['icon','icon-active', item.is_active ? 'actived' : '']"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

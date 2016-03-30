@@ -1,0 +1,69 @@
+<div class="form-wrap">
+    <div class="form-content">
+        <form class="edit-form" novalidate dp-form-validator=""  name="adsource_form">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">控制台标题: </label>
+                            <div class="col-sm-6" >
+                                <input type="text" name="title" class="form-control" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">计费类型: </label>
+                            <div class="col-sm-6">
+                                <select name="accounttype" ng-model="entity.accounttype" ng-options="item.number as item.value for item in displayInfo.accounttype"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">来源: </label>
+                            <div class="col-sm-6">
+                                <select name="source" ng-model="entity.source" ng-options="item.number as item.value for item in displayInfo.source"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">回调地址: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="entity.callbackurl" ng-model="entity.callbackurl" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">点击描述语: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="entity.call2action" ng-model="entity.call2action" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">广告源类型: </label>
+                            <div class="col-sm-6">
+                                <select name="adtype" ng-model="entity.type" ng-options="item.number as item.value for item in displayInfo.type"></select>
+                            </div>
+                        </div>
+
+                        <!-- server_native类型 -->
+                        <div ng-if="entity.type==1 || entity.type == 2">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">源网址: </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="server_native_sourceurl" ng-model="entity.sourceurl" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-btn-wrap">
+                <button type="submit" class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</div>

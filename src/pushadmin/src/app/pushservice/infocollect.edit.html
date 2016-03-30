@@ -1,0 +1,130 @@
+<div class="form-wrap">
+    <div class="form-content">
+        <form class="edit-form" novalidate dp-form-validator=""  name="pushservice_form" dp-after-validator="afterVali">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Collection_switch" ng-model="entity.switch"/> Collection_switch
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Log_level: </label>
+                            <div class="col-sm-5">
+                                <select name="log_level" ng-model="entity.log_level" ng-options="o.value as o.name for o in log_level"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Duration: </label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" name="duration" ng-model="entity.duration"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">User Type: </label>
+                            <div class="col-sm-5">
+                                <select name="user_type" ng-model="entity.user_type" ng-options="o.value as o.name for o in user_type"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Need tips: </label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" name="need_tips" ng-model="entity.need_tips"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">report count: </label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" name="report_count" ng-model="entity.report_count"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">推送规则：</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="rule_title" class="form-control" ng-model="entity.aosruledata.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosruledata" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,entity.aosruledata.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosruledata" ng-click="removeFiled('aosruledata')"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>Detect Modules：</h5>
+                </div>
+                <div collapse="isCollapse2">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-detectmodule">
+                                    <thead>
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>Order</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.detectmodule">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="detectmoduleTitle" ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'pushservice', 'detectmodule', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'pushservice', 'detectmodule', 'title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'pushservice', 'detectmodule', 'title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-order-cell" name="detectmoduleOrder" ng-model="refItem.order" readonly>
+                                        </td>
+                                        <td class="ref-actions">
+                                            <input type="checkbox" ng-model="refItem.isDelete" name="detectmoduleDelete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.detectmodule[entity.detectmodule.length]['title']" name="detectmoduleTit" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'pushservice', 'detectmodule', 'title', entity.detectmodule.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'pushservice', 'detectmodule', 'title', entity.detectmodule.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!--<input type="text" class="form-control inline-ref-order-cell" ng-model="entity.bookmarkfolder[entity.bookmarkfolder.length]['order']">-->
+                                        </td>
+                                        <td class="ref-actions">
+                                            <!--<input type="checkbox">-->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-btn-wrap">
+                <!--<button class="btn btn-success right" ng-click="save()">保存</button>-->
+                <button type="submit" class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+                <!--<button type="submit" class="btn btn-default right" dp-form-submit="saveAndContinueEdit">保存并继续编辑</button>-->
+                <button type="submit" class="btn btn-default right" ng-if="isEditState && !isPopup()" dp-form-submit="saveAsNew" has-permission="add">保存为新的</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

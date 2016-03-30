@@ -1,0 +1,24 @@
+<div class="list-wrap">
+    <div class="list-content" cc-loading-layer="!transTableParams.settings().$loading">
+        <div ng-show="!roleUserListParams.settings().$loading && items && !items.length" class="no-data">The list is empty, nothing to do！</div>
+        <table ng-table="roleUserListParams" class="table table-bordered  table-role" template-pagination="app/layouts/pagination.html" >
+            <tr ng-repeat="item in items">
+                <td data-title="'ID'" width="4%">{{item.id}}</td>
+                <td data-title="'User Name'" width="17%">{{item.user_name}}</td>
+                <td data-title="'Role'"  width="15%">{{item.role}}</td>
+                <td data-title="'Last Login'"  width="13%">{{item.last_login}}</td>
+                <td data-title="'Total Login'" width="7%">{{item.total_login}}</td>
+                <td data-title="'Mark'" width="10%">{{item.mark}}</td>
+                <td data-title="'Permissions'"  width="10%"><a href="" class="btn btn-default" ng-click="viewDetail(item)">View Details</a></td>
+                <td data-title="'Actions'" width="6%" class="trans-action-col actions-wrap"  style="padding-left:10px;">
+                    <a class="tip" href="" tooltip="Edit" ng-click="edit(item)" has-permission="edit">
+                        <i class="action-icon fa fa-pencil"></i>
+                    </a>
+                    <a class="tip" href="" tooltip="{{ item.is_active ? 'Disable' : 'Enable'}}" ng-click="disable(item)" has-permission="delete">
+                        <i ng-class="['action-icon fa', item.is_active ? 'fa-check-circle-o' : 'fa-ban']"></i>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

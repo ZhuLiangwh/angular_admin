@@ -1,0 +1,168 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="rateus_form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group" ng-if="isEditState" style="display:none">
+                            <label class="col-sm-2 control-label">ID: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.id" name="id" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">控制台标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">客户端标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.name" name="name" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标题颜色: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.title_color" placeholder="请填写'#980690'的正确格式" ng-pattern="/^#[0-9a-fA-F]{6}$/" name="title_color" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">日间竖屏: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="vertical_day_banner" ng-model="entity.vertical_day_banner.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp_details('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.vertical_day_banner.title && entity.vertical_day_banner.length!=0" ng-click="popUp_details('edit','staticresource', 'icon', 'title', 0 ,entity.vertical_day_banner.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp_details('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.vertical_day_banner.title && entity.vertical_day_banner.length!=0" ng-click="removeFiled('vertical_day_banner')"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">夜间竖屏: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="vertical_night_banner" ng-model="entity.vertical_night_banner.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp_details2('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.vertical_night_banner.title && entity.vertical_night_banner.length!=0" ng-click="popUp_details2('edit','staticresource', 'icon', 'title', 0 ,entity.vertical_night_banner.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp_details2('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.vertical_night_banner.title && entity.vertical_night_banner.length!=0" ng-click="removeFiled('vertical_night_banner')"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">日间横屏: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="horizontal_day_banner" ng-model="entity.horizontal_day_banner.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp_details3('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.horizontal_day_banner.title && entity.horizontal_day_banner.length!=0" ng-click="popUp_details3('edit','staticresource', 'icon', 'title', 0 ,entity.horizontal_day_banner.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp_details3('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.horizontal_day_banner.title && entity.horizontal_day_banner.length!=0" ng-click="removeFiled('horizontal_day_banner')"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">夜间横屏: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="horizontal_night_banner" ng-model="entity.horizontal_night_banner.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp_details4('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.horizontal_night_banner.title && entity.horizontal_night_banner.length!=0" ng-click="popUp_details4('edit','staticresource', 'icon', 'title', 0 ,entity.horizontal_night_banner.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp_details4('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.horizontal_night_banner.title && entity.horizontal_night_banner.length!=0" ng-click="removeFiled('horizontal_night_banner')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">night_close_btn: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="night_close_btn" ng-model="entity.night_close_btn.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp_details5('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.night_close_btn.title && entity.night_close_btn.length!=0" ng-click="popUp_details5('edit','staticresource', 'icon', 'title', 0 ,entity.night_close_btn.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp_details5('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.night_close_btn.title && entity.night_close_btn.length!=0" ng-click="removeFiled('night_close_btn')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">day_close_btn: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="day_close_btn" ng-model="entity.day_close_btn.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp_details6('list','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.day_close_btn.title && entity.day_close_btn.length!=0" ng-click="popUp_details6('edit','staticresource', 'icon', 'title', 0 ,entity.day_close_btn.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp_details6('add','staticresource', 'icon', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.day_close_btn.title && entity.day_close_btn.length!=0" ng-click="removeFiled('day_close_btn')"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">描述: </label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" ng-model="entity.description" name="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">描述颜色: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.description_color" placeholder="请填写'#980690'的正确格式" ng-pattern="/^#[0-9a-fA-F]{6}$/" name="description_color" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">like_btn_text: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="like_btn_text" class="form-control" ng-model="entity.like_btn_text" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">like_btn_text_color: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.like_btn_text_color" placeholder="请填写'#980690'的正确格式" ng-pattern="/^#[0-9a-fA-F]{6}$/" name="like_btn_text_color" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">dislike_btn_text: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="dislike_btn_text" class="form-control" ng-model="entity.dislike_btn_text" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">dislike_btn_text_color: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.dislike_btn_text_color" placeholder="请填写'#980690'的正确格式" ng-pattern="/^#[0-9a-fA-F]{6}$/" name="dislike_btn_text_color" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">配置规则：</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="rule_title" class="form-control" ng-model="entity.aosruledata.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosruledata" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,entity.aosruledata.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosruledata" ng-click="removeFiled('aosruledata')"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+        </div>
+    </form>
+</div>

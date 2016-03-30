@@ -1,0 +1,83 @@
+<div class="list-wrap">
+    <!--<div class="filter-wrap  list-top clearfix">-->
+        <!--<form class="form-inline" role="form">-->
+            <!--<select ng-options="group.display_value for group in filterGroups" ng-model="filter.models" ng-change="changeFilterGroup()"></select>-->
+            <!--<select ng-options="role.display_value for role in filterRoles" ng-model="filter.user_names" ng-change="changeFilterRole()"></select>-->
+            <!--<div class="form-group">-->
+                <!--<div class="input-group has-feedback">-->
+                    <!--<input class="form-control" type="text" ng-model="search.string">-->
+                    <!--<span class="glyphicon form-control-feedback glyphicon-search" ng-click="search()"></span>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</form>-->
+        <!--<div class="history-form" style="display: inline">-->
+            <!--<div class="col-md-6 date-selected">-->
+                <!--&lt;!&ndash; <label class="date-picker-text">from</label> &ndash;&gt;-->
+                <!--<span class="input-group date-picker-select">-->
+                  <!--<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.start.dt" max-date="datePicker.end.dt" is-open="datePicker.start.opened" show-button-bar="false" ng-required="true" readonly/>-->
+                  <!--<span class="input-group-btn">-->
+                    <!--<button type="button" class="btn btn-default" ng-click="open($event, datePicker.start)" ng-disabled="datePicker.end.opened"> <i class="glyphicon glyphicon-calendar"></i>-->
+                    <!--</button>-->
+                  <!--</span>-->
+                <!--</span>-->
+                <!--<label  class="date-picker-text">—</label>-->
+                <!--<span class="input-group date-picker-select end-date">-->
+                  <!--<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.end.dt" min-date="datePicker.start.dt" max-date="datePicker.end.max" is-open="datePicker.end.opened" show-button-bar="false" ng-required="true"  readonly/>-->
+                  <!--<span class="input-group-btn">-->
+                    <!--<button type="button" class="btn btn-default" ng-click="open($event, datePicker.end)" ng-disabled="datePicker.start.opened"> <i class="glyphicon glyphicon-calendar"></i>-->
+                    <!--</button>-->
+                  <!--</span>-->
+                <!--</span>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="list-top clearfix">
+        <div class="filter-wrap left">
+            <!--<dp-multi-dropdown selected-model="selectOptions" on-selected="filter(node)"></dp-multi-dropdown>-->
+            <select ng-options="group.display_value for group in filterGroups" ng-model="filter.model" ng-change="changeFilterGroup()"></select>
+            <select ng-options="role.display_value for role in user_name" ng-model="filter.user_name" ng-change="changeFilterRole()"></select>
+        </div>
+        <div class="search-wrap left">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" type="text" ng-model="search.string">
+                    <span class="glyphicon glyphicon-search form-control-feedback" ng-disabled="isLoading" ng-click="goSearch()"></span>
+                </div>
+            </div>
+        </div>
+        <div class="list-datepicker right">
+            <div class="date-selected">
+                <span class="input-group date-picker-select">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.start.dt"
+                           max-date="datePicker.end.dt" is-open="datePicker.start.opened" show-button-bar="false" readonly
+                           ng-required="true"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event, datePicker.start)" ng-disabled="datePicker.end.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </span>
+                <label class="date-picker-text">—</label>
+                <span class="input-group date-picker-select end-date">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.end.dt"
+                           min-date="datePicker.start.dt" max-date="datePicker.end.max" is-open="datePicker.end.opened"
+                           show-button-bar="false" readonly ng-required="true"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event, datePicker.end)" ng-disabled="datePicker.start.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="list-content" cc-loading-layer="!transTableParams.settings().$loading">
+        <div ng-show="!historyTableParams.settings().$loading && items && !items.length" class="no-data">The list is empty, nothing to do！</div>
+            <table ng-table="historyTableParams" class="table table-bordered trans-table" template-pagination="app/layouts/pagination.html" >
+                <tr ng-repeat="item in items">
+                    <td data-title="'操作时间'" width="20%" class="text-align-c">{{item.time}}</td>
+                    <td data-title="'用户名'" width="20%" class="text-align-c">{{item.user_name}}</td>
+                    <td data-title="'用户操作'">{{item.actions}}</td>
+                    <td data-title="'ID'" class="text-align-c">{{item.id}}</td>
+                    <td data-title="'操作详情'" width="30%">{{item.title}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>

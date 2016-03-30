@@ -1,0 +1,148 @@
+define(['common/utils/date', 'common/utils/dataConverter','text!layouts/confirm-dialog.html','text!layouts/alert-dialog.html','common/utils/url'], function (dateUtil, dataConverter,confirmDialogTpl,alertDialogTpl,url) {
+    var diName = 'AdposListCtrl';
+    return {
+        __register__: function (mod) {
+            mod.controller(diName, ['$scope', '$window', '$state', '$filter', '$location', '$modal', 'ngTableParams', 'ds.adpos', 'logger', 'apiService','dpErrorHandler', 'PER_PAGE','dpDialog', AdposListCtrl]);
+            return mod;
+        }
+    };
+
+    function AdposListCtrl($scope, $window, $state, $filter, $location, $modal, ngTableParams, DS, logger, apiService, dpErrorHandler,PER_PAGE,dpDialog) {
+        var apiParams = $scope.apiParams = {};
+        var vm = $scope.vm = {
+            'listChecked': [],
+            'listTotal': 0,
+            'idSort':'desc',
+            'firstCreatedSort':'desc',
+            'lastModifiedSort':'desc'
+        };
+        var dataCache = {};
+        $scope.getCheckSortUrl = function() {
+            return apiService.getApiUrl('/adpos/check_unique');
+        }
+
+        $scope.isPopup = function () {
+            return !!$location.search().popup;
+        };
+
+        $scope.addAdpos = function () {
+            $state.go('turbotservice.add-adpos');
+        };
+
+        $scope.ViewDetail = function (item) {
+            $state.go('turbotservice.edit-adpos',{id:item.id});
+        };
+
+        $scope.choice = function (item) {
+            if ($location.search().popup) {
+                var ifr_window = top['dp_dialog'].length >= 2  ? top.frames[top['dp_dialog'].slice(-2)[0].from].contentWindow : top.frames['project'];
+                ifr_window.postMessage({item:angular.copy(item),single:$location.search().single},'*');
+                dpDialog.close();
+            }
+        };
+        
+        var del = function(content,params,delSuccess,delFail){
+            $modal.open({
+                template: confirmDialogTpl,
+                scope: $scope,
+                controller: ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+                    $scope.title = 'Confirm';
+                    $scope.content = content;
+                    $scope.cancel = function () {
+                        $modalInstance.dismiss('cancel');
+                    };
+                    $scope.confirm = function () {
+                        DS.delete(params).then(function () {
+                            delSuccess();
+                        }, function (error) {
+                            delFail(error);
+                        });
+                        $modalInstance.dismiss('cancel');
+                    };
+                }]
+            });
+        };
+        var delSuccess = function(){
+            var len = $scope.items.length - 1, item;
+            for (; len >= 0; len--) {
+                item = $scope.items[len];
+                if (vm.listChecked.indexOf(item.id) > -1) $scope.items.splice(len, 1);
+            }
+            vm.listTotal -= vm.listChecked.length;
+            vm.listChecked = []; //设置listChecked.length = 0没用，不能引用watch的执行
+            logger.success('delete success!');
+        };
+        $scope.delete = function(){
+            if (vm.listChecked.length === 0) return;
+            del('您确定要删除吗',{items:vm.listChecked},delSuccess,function(error){
+                if(error.data.status === 1005){
+                    del('您删除的数据被文件夹引用，确定要删除吗?',{items:vm.listChecked,comfirm:true},delSuccess,function(error){
+                        logger.error(error.data.msg || 'delete faild!');
+                    })
+                }else{
+                    logger.error(error.data.msg || 'delete faild!');
+                }
+            });
+        };
+
+        $scope.filter = function (node) {
+            var selectedValue = node.selectedValue;
+            _.extend(apiParams, selectedValue);
+            $scope.adposTableParams.page(1);
+            $scope.adposTableParams.reload();
+        };
+
+        $scope.goSearch = function () {
+            apiParams.searchKeyword = $scope.search.string;
+            $scope.adposTableParams.page(1);
+            $scope.adposTableParams.reload();
+        };
+
+        $scope.adposTableParams = new ngTableParams({
+            page: 1,
+            count: PER_PAGE
+        }, {
+            isCurrent: function (page, params) {
+                return page.number === params.page() && page.type !== 'prev' && page.type !== 'next';
+            },
+            getData: function ($defer, params) {
+                var get = function(data){
+                    var resData = data,
+                        items = resData.items;
+                    filterData = resData.filters;
+
+                    if (!$scope.selectOptions) {
+                        //only assign at first time, because it would cause dpMultiDropdown model change and reset default value
+                        $scope.selectOptions = filterData;
+                    }
+                    $scope.items = items;
+                    vm.listTotal = resData.total;
+                    params.total(resData.total);
+                    $defer.resolve($scope.items);
+                };
+
+                apiParams.limit = PER_PAGE; //add api parameter
+                apiParams.index = params.page();
+
+                var filterParam = JSON.stringify(apiParams);
+                $scope.isLoading = true;
+                if(dataCache[filterParam]){
+                    get(dataCache[filterParam]);
+                }else{
+                    DS.list(apiParams).then(function () {
+                        get(DS.data);
+                        dataCache[filterParam] = DS.data;
+                        $scope.isLoading = false;
+                    }, function () {
+                        $scope.isLoading = false;
+                    });
+                }
+            }
+        });
+
+        //排序处理
+        $scope.$watch('apiParams.sort',function(){
+            $scope.adposTableParams.reload();
+        },true);
+    }
+});

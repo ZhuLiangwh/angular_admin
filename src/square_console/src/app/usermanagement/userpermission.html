@@ -1,0 +1,31 @@
+<form action="" ng-submit="submit()">
+    <div class="panel panel-default">
+        <div class="panel-heading">{{feature.title}}</div>
+        <div class="panel-body bg-gray">
+            <div class="row">
+                <input type="checkbox" all-select-dire="feature" has-selected="perm_list" all-select-resource="resource" class="hide"/>
+                <div class="col-xs-2 mb-n"  ng-repeat="item in feature_items">
+                    <div class="permiss-item">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="feature" value="{{item.value}}" ng-disabled="item.disabled"> {{item.display_value}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-repeat="permission in permissions">
+        <div class="panel-heading">{{permission.title}}</div>
+        <div class="panel-body bg-gray">
+            <div class="permiss-mod" ng-repeat="item in permission.items">
+                <div class="permiss-mod-title">{{item.model}}</div>
+                <div class="permiss-mod-con">
+                    <label class="permiss-mod-item" ng-repeat="per in item.items">
+                        <input type="checkbox" name="feature" value="{{per.value}}" ng-disabled="per.disabled">{{per.display_value}}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" has-feature="grant-perms-to-user">Submit</button>
+</form>

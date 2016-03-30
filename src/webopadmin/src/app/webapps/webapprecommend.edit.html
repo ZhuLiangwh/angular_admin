@@ -1,0 +1,110 @@
+<div class="form-wrap" ng-init="webapp_form={}">
+    <form class="edit-form" novalidate dp-form-validator="" name="webapp_form" id="webapp_form" dp-after-validator="afterVali">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标题: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="title" class="form-control" ng-if="isEditState" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                                <input type="text" name="title" class="form-control" ng-if="!isEditState" dp-back-method="{{methods()}}" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">描述: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.describe" name="describe" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">规则:</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="rule_title" class="form-control" ng-model="entity.aosruledata.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosruledata.title && entity.aosruledata.length!=0" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,entity.aosruledata.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosruledata.title && entity.aosruledata.length!=0" ng-click="removeFiled('aosruledata')"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>推荐应用列表</h5>
+                </div>
+                <div collapse="isCollapse2">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="inline-ref-table">
+                                <table class="table table-bordered ref-table ref-webapp">
+                                    <thead>
+                                    <tr>
+                                        <th>Application</th>
+                                        <th>Order</th>
+                                        <th>Tag</th>
+                                        <th>置顶</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="refItem in entity.webapp">
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="webappTitle{{$index}}" dp-dynamic-field-name ng-model="refItem['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'webapps', 'webapp', 'title', $index)"></span>
+                                                <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'webapps', 'webapp', 'title', $index, refItem.id)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'webapps', 'webapp', 'title', $index)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-order-cell" name="webappOrder{{$index}}" dp-dynamic-field-name ng-model="refItem.order">
+                                        </td>
+                                        <td class="ref-actions">
+                                            <input type="checkbox" ng-model="refItem.tag" name="tag">
+                                        </td>
+                                        <td class="ref-actions">
+                                            <input type="checkbox" ng-model="refItem.stick" name="stick">
+                                        </td>
+                                        <td class="ref-actions">
+                                            <button type="button" class="btn btn-success mr0" ng-click="deleteRow(refItem)" name="webappDelete">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control inline-ref-input-cell" name="webappTit" ng-model="entity.webapp[entity.webapp.length]['title']" readonly>
+                                            <div class="ref-btn-wrap">
+                                                <span class="glyphicon glyphicon-search" ng-click="popUp('list', 'webapps', 'webapp', 'title', entity.webapp.length)"></span>
+                                                <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'webapps', 'webapp', 'title', entity.webapp.length)"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td class="ref-actions"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+            <!-- <button class="btn btn-default right" ng-click="saveAndContinueEdit()">保存并继续编辑</button> -->
+            <!--<button class="btn btn-default right" dp-form-submit="saveAsNew" ng-if="isEditState && !isPopup()" has-permission="add">保存为新的</button>-->
+        </div>
+    </form>
+</div>

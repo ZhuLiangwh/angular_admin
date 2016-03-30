@@ -1,0 +1,162 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate name="atheme_form" dp-form-validator="">
+        <div class="widget-box">
+            <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                <h5>必填项</h5>
+            </div>
+            <div collapse="isCollapse1">
+                <div class="widget-content">
+                    <div class="form-group" ng-if="isEditState">
+                        <label class="col-sm-2 control-label">ID: </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" ng-model="entity.id" name="id" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Theme名称: </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="name" class="form-control" ng-model="entity.name" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.title" dp-back-check="{{getCheckSortUrl()}}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">颜色: </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" ng-model="entity.color" placeholder="请填写'#980690'的正确格式" ng-pattern="/^#[0-9a-fA-F]{6}$/" name="color" required>
+                        </div>
+                        <span class="control-tip">Red "#ff0000"</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">UID: </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="uid" class="form-control" ng-model="entity.uid" dp-back-checkid="{{ids()}}" dp-back-method="{{methods()}}" ng-model="entity.uid" dp-back-check="{{getCheckSortUrl()}}" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">下载次数: </label>
+                        <div class="col-sm-6">
+                            <input type="number" name="download" class="form-control" ng-model="entity.downloads" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">size: </label>
+                        <div class="col-sm-6">
+                            <input class="form-control" name="size" ng-model="entity.size" readonly/>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="isEditState">
+                        <label class="col-sm-2 control-label">Theme文件: </label>
+                        <p class="col-sm-6">
+                            <a class="control-label"  href="{{entity.downpath}}">{{entity.downpath}}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--图片资源-->
+        <div class="widget-box">
+            <div class="widget-title" ng-click="isCollapse2 = !isCollapse2">
+                <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                <h5>图片资源</h5>
+            </div>
+            <div collapse="isCollapse2">
+                <div class="widget-content">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Icon (220*348): </label>
+                    <div class="col-sm-6">
+                      <div class="img-wrapper" style="margin-bottom: 10px;">
+                        <img ng-src="{{entity.thumbnail1}}" style="max-width:400px;">
+                      </div>
+                      <div class="select-file-wrap">
+                        <input type="file" name="thumbnail1" class="input-file" file-model="entity.thumbnail1" on-changed="getFileInfo(node,thumbnail1)">
+                        <button class="btn btn-default">更改文件</button><span>{{entity.thumbnail1.name}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Icon_detail (760*690): </label>
+                    <div class="col-sm-6">
+                      <div class="img-wrapper" style="margin-bottom: 10px;">
+                        <img ng-src="{{entity.thumbnail2}}" style="max-width:400px;">
+                      </div>
+                      <div class="select-file-wrap">
+                        <input type="file" name="thumbnail2" class="input-file" file-model="entity.thumbnail2" on-changed="getFileInfo(node,thumbnail2)">
+                        <button class="btn btn-default">更改文件</button><span>{{entity.thumbnail2.name}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Paper (760*1280): </label>
+                    <div class="col-sm-6">
+                      <div class="img-wrapper" style="margin-bottom: 10px;">
+                        <img ng-src="{{entity.wallpaper}}" style="max-width:400px;">
+                        
+                      </div>
+                      <div class="select-file-wrap">
+                        <input type="file" name="wallpaper" class="input-file" file-model="entity.wallpaper" on-changed="getFileInfo(node,wallpaper)">
+                        <button class="btn btn-default">更改文件</button><span>{{entity.wallpaper.name}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+            
+        <div class="widget-box">
+           <div class="widget-title" ng-click="isCollapse3 = !isCollapse3">
+               <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+               <h5>本地化名称</h5>
+           </div>
+           <div collapse="isCollapse3">
+               <div class="widget-content">
+                   <div class="form-group">
+                       <div class="inline-ref-table">
+                           <table class="table table-bordered ref-table ref-atheme">
+                               <thead>
+                                 <tr>
+                                     <th>Locale</th>
+                                     <th>名称</th>
+                                     <th>Delete</th>
+                                 </tr>
+                               </thead>
+                              <tbody>
+                                 <tr ng-repeat="refItem in entity.athemelocale">
+                                     <td>
+                                         <input type="text" class="form-control inline-ref-input-cell" name="urlparamTitle" ng-model="refItem['locale']" readonly>
+                                         <div class="ref-btn-wrap"> 
+                                             <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'staticresource', 'athemelocale', 'locale', $index)"></span>  
+                                             <span class="glyphicon glyphicon-pencil" ng-click="popUp('edit', 'staticresource', 'athemelocale', 'locale', $index, refItem.id)"></span>                                           
+                                         </div>
+                                     </td>
+                                     <td>
+                                         <input type="text" name="urlparamName" class="form-control inline-ref-order-cell" 
+                                          ng-model="refItem['name']" readonly>
+                                     </td>
+                                     <td class="ref-actions">
+                                         <input type="checkbox" name="athemelocale_isDelete" ng-model="refItem.isDelete" ng-true-value="1" ng-false-value="0">
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td>
+                                         <input type="text" class="form-control inline-ref-input-cell" ng-model="entity.athemelocale[entity.locale.length]['locale']" name="atheme_locale" readonly>  
+                                         <div class="ref-btn-wrap"> 
+                                             <span class="glyphicon glyphicon-plus" ng-click="popUp('add', 'staticresource', 'athemelocale', 'locale', entity.athemelocale.length)"></span>     
+                                         </div>
+                                     </td>
+                                     <td></td>
+                                     <td class="ref-actions"></td>
+                                 </tr>
+                               </tbody>
+                           </table>
+                       </div>
+                   </div>
+               </div>
+           </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+        </div>
+    </form>
+</div>
+

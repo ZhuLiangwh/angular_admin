@@ -1,0 +1,123 @@
+<div class="form-wrap">
+    <form class="edit-form" novalidate dp-form-validator="" name="edit-form">
+        <div class="form-content">
+            <div class="widget-box">
+                <div class="widget-title" ng-click="isCollapse1 = !isCollapse1">
+                    <span class="icon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <h5>必填项</h5>
+                </div>
+                <div collapse="isCollapse1">
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">平台: </label>
+                            <div class="col-sm-6">
+                                <select ng-model="entity.platform" ng-options="item.value as item.display_value for item in displayInfo.platform">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">规则: </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" ng-model="entity.aosruledata.title" name="aosruledata.title" readonly>
+                            </div>
+                            <div class="col-sm-4 clear_col_margin">
+                                <span class="ref-icon glyphicon glyphicon-search" ng-click="popUp('list','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-pencil" ng-if="entity.aosruledata" ng-click="popUp('edit','aosrule', 'aosruledata', 'title', 0 ,entity.aosruledata.id, true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-plus" ng-click="popUp('add','aosrule', 'aosruledata', 'title', 0 ,'', true)"></span>
+                                <span class="ref-icon glyphicon glyphicon-remove" ng-if="entity.aosruledata" ng-click="removeFiled('aosruledata')"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属分类: </label>
+                            <div class="col-sm-6">
+                                <select ng-model="entity.category" name="cate" ng-options="item.value as item.display_value for item in displayInfo.category"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">问题详情: </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="qdetails" class="form-control" placeholder="请填写文案，文案不能重复！" ng-model="entity.title" required="">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="isfirstpage" ng-model="entity.promote"> 是否推到首页
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">解决方案: </label>
+                            <div class="col-sm-6">
+                                <div class="ueditor" name="solution_content" ng-model="entity.answer" config="_simpleConfig"></div>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="isinform" ng-model="entity.banner"> 是否推到通知
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="" ng-show="entity.banner">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">开始时间: </label>
+                                <div class="col-sm-2">
+                                    <p class="input-group">
+                                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.start.dt" is-open="datePicker.start.opened" show-button-bar="false" ng-required="true" name="datePicker.start.dt"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openData($event, datePicker.start)" ng-disabled="datePicker.start.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                    </p>
+                                </div>
+                                <span class="control-label">日期格式：2014-11-10    19:02（24小时制）</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">结束时间: </label>
+                                <div class="col-sm-2">
+                                    <p class="input-group">
+                                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="datePicker.end.dt" is-open="datePicker.end.opened" show-button-bar="false" ng-required="true" name="datePicker.end.dt"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openData($event, datePicker.end)" ng-disabled="datePicker.end.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                    </p>
+                                </div>
+                                <span class="control-label">日期格式：2014-11-10    19:02（24小时制）</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">出现频次: </label>
+                                <div class="col-sm-6 form-control-static">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="radioTime" value="1" ng-model="entity.frequence"> 只出现一次
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="radioTime" value="2" ng-model="entity.frequence"> 总是出现
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">出现位置: </label>
+                                <div class="col-sm-6 form-control-static">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="radioLocation" value="1" ng-model="entity.location"> 顶部
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="radioLocation" value="2" ng-model="entity.location"> 底部
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">发布时间: </label>
+                                <div class="col-sm-6 form-control-static">
+                                    {{entity.last_modified}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-btn-wrap">
+            <button class="btn btn-success right" dp-form-submit="save" has-permission="edit||add">保存</button>
+            <!-- <button class="btn btn-default right" ng-click="saveAndContinueEdit()">保存并继续编辑</button>
+            <button class="btn btn-default right" ng-click="saveAsNew()">保存为新的</button> -->
+        </div>
+    </form>
+</div>

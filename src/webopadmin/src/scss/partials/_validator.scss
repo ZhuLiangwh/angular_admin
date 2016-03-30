@@ -1,0 +1,126 @@
+.dp_invalid {
+  border-color:#e2a3a3;
+}
+.form_vali_tip { 
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 1000;
+}
+.form_vali_tip.right {
+  float:left;
+}
+.form_vali_tip_con {
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: 1010;
+  width: 250px;
+  padding: 1px;
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid #e2a3a3;
+}
+.form_vali_tip_con span{
+  text-align: left;
+  background-color: #fff;
+  width: 200px;
+  font-size: 12px;
+  display: block;
+  padding: 6px 14px;
+}
+.form_vali_tip_con i{
+  border-width: 6px;
+}
+.form_vali_tip_con i:after {
+  border-width: 10px;
+  content: "";
+}
+.form_vali_tip_con i,.form_vali_tip_con i:after{
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+/*top*/
+.form_vali_tip.top{
+  top: -40px;
+  left: 15px;
+}
+.form_vali_tip.top i{
+    left: 50%;
+    margin-left: -11px;
+    border-bottom-width: 0;
+    border-top-color: #e2a3a3;
+    bottom: -7px;
+}
+.form_vali_tip.top i:after {
+    content: " ";
+    bottom: 1px;
+    margin-left: -10px;
+    border-bottom-width: 0;
+    border-top-color: #fff;
+}
+
+/*right*/
+.form_vali_tip.right{ 
+  top: 0;
+  right: 0;
+}
+.form_vali_tip.right i{
+    top: 50%;
+    left: -7px;
+    margin-top: -7px;
+    border-left-width: 0;
+    border-right-color: #e2a3a3;
+    bottom: -11px;
+}
+.form_vali_tip.right i:after {
+    content: " ";
+    left: 1px;
+    bottom: -10px;
+    border-left-width: 0;
+    border-right-color: #fff; 
+}
+
+/*bottom*/
+.form_vali_tip.bottom{
+  top: 40px;
+  left: 15px;
+}
+.form_vali_tip.bottom i{
+    left: 50%;
+    margin-left: -11px;
+    border-top-width: 0;
+    border-bottom-color: #e2a3a3;
+    top: -7px;
+}
+.form_vali_tip.bottom i:after {
+    content: " ";
+    top: 1px;
+    margin-left: -10px;
+    border-top-width: 0;
+    border-bottom-color: #fff;
+}
+
+/*left*/
+.form_vali_tip.left{
+  top: 0;
+  left: -250px;
+}
+.form_vali_tip.left i{
+    top: 50%;
+    right: -7px;
+    margin-top: -7px;
+    border-right-width: 0;
+    border-left-color: #e2a3a3;
+}
+.form_vali_tip.left i:after {
+    content: " ";
+    right: 1px;
+    border-right-width: 0;
+    border-left-color: #fff;
+    bottom: -10px;
+}
